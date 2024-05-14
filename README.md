@@ -15,3 +15,10 @@ Collection of handy tools and tweaks for gamers across the web
 1. In Chrome go to the extensions page (`chrome://extensions`).
 1. Enable Developer Mode.
 1. Drag the `elecord-extension-main` folder anywhere on the page to import it (do not delete the folder afterwards).
+
+## Features
+
+- [x] Add gg.deals context menu search
+- [x] Add Steam context menu search
+- [ ] Create settings menu
+- [ ] Think of some more features
