@@ -1,29 +1,32 @@
+// Parent context menu
 chrome.contextMenus.create({
-    id: "elecord",
+    id: "menu-elecord",
     title: "Elecord",
     contexts: ["selection"]
 });
 
+// Child context menus
 chrome.contextMenus.create({
-    id: "search-ggdeals",
+    id: "menu-ggdeals",
     title: "🔎 Search gg.deals for '%s'",
-    contexts: ["selection"], 
-    parentId: "elecord"
+    contexts: ["selection"],
+    parentId: "menu-elecord"
 });
 
 chrome.contextMenus.create({
-    id: "search-steam",
+    id: "menu-steam",
     title: "🔎 Search Steam for '%s'",
     contexts: ["selection"],
-    parentId: "elecord"
+    parentId: "menu-elecord"
 });
 
+// Event listeners
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "search-ggdeals") {
+    if (info.menuItemId === "menu-ggdeals") {
         let url = `https://gg.deals/games/?view=list&title=${encodeURIComponent(info.selectionText)}`;
         chrome.tabs.create({ url: url });
     };
-    if (info.menuItemId === "search-steam") {
+    if (info.menuItemId === "menu-steam") {
         let url = `https://store.steampowered.com/search/?term=${encodeURIComponent(info.selectionText)}`;
         chrome.tabs.create({ url: url });
     };

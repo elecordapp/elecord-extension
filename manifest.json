@@ -1,22 +1,26 @@
 {
     "name": "Elecord Extension",
-    "version": "1.0",
+    "version": "1.0.1",
     "manifest_version": 2,
     "description": "Collection of handy tools and tweaks for gamers across the web",
     "homepage_url": "https://github.com/elecordapp/elecord-extension",
     "permissions": [
         "contextMenus",
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "scripts": ["background.js"]
     },
     "icons": {
         "128": "icon.png"
     },
     "options_ui": {
         "page": "options.html",
-        "open_in_tab": true
+        "open_in_tab": false,
+        "browser_action": {
+            "default_title": "Elecord Extension",
+            "default_icon": "icon.png"
+        }
     }
 }

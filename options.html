@@ -6,9 +6,15 @@
     <style>
         body {
             font-family: sans-serif;
+            background-color: #222;
+            color: #fff;
         }
 
         h1 {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
             margin-bottom: 1rem;
         }
 
@@ -19,23 +25,31 @@
         label {
             display: block;
         }
+
+        .container {
+            padding-left: 5vw;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Options</h1>
-    <div class="option">
-        <label>
-            <input type="checkbox" id="search-games" checked>
-            Enable "Search Game" context menu
-        </label>
+    <div class="container">
+        <h1>Options</h1>
+        <h3>Context Menu</h3>
+        <div class="option">
+            <label>
+                <input type="checkbox" id="option-ggdeals">
+                Enable "Search gg.deals"
+            </label>
+        </div>
+        <div class="option">
+            <label>
+                <input type="checkbox" id="option-steam">
+                Enable "Search Steam"
+            </label>
+        </div>
     </div>
-    <div class="option">
-        <label>
-            <input type="checkbox" id="search-steam" checked>
-            Enable "Search on Steam" context menu
-        </label>
-    </div>
+    <script src="options.js"></script>
 </body>
 
 </html>
