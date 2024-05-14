@@ -20,5 +20,5 @@ Collection of handy tools and tweaks for gamers across the web
 
 - [x] Add gg.deals context menu search
 - [x] Add Steam context menu search
-- [ ] Create settings menu
+- [x] Create settings menu
 - [ ] Think of some more features
