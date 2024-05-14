@@ -6,6 +6,8 @@
     <style>
         body {
             font-family: sans-serif;
+            background-color: #222;
+            color: #fff;
         }
 
         h1 {
@@ -19,22 +21,28 @@
         label {
             display: block;
         }
+
+        .container {
+            padding-left: 5vw;
+        } 
     </style>
 </head>
 
 <body>
-    <h1>Options</h1>
-    <div class="option">
-        <label>
-            <input type="checkbox" id="search-games" checked>
-            Enable "Search Game" context menu
-        </label>
-    </div>
-    <div class="option">
-        <label>
-            <input type="checkbox" id="search-steam" checked>
-            Enable "Search on Steam" context menu
-        </label>
+    <div class="container">
+        <h1>Options</h1>
+        <div class="option">
+            <label>
+                <input type="checkbox" id="search-games" checked>
+                Enable "Search Game" context menu
+            </label>
+        </div>
+        <div class="option">
+            <label>
+                <input type="checkbox" id="search-steam" checked>
+                Enable "Search on Steam" context menu
+            </label>
+        </div>
     </div>
 </body>
 
