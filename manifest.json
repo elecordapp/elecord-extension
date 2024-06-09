@@ -10,6 +10,10 @@
         "storage",
         "activeTab"
     ],
+    "action": {
+        "default_title": "Elecord",
+        "default_icon": "icon.png"
+    },
     "content_scripts": [
         {
             "matches": ["*://www.pcgamer.com/*"],
@@ -24,17 +28,13 @@
         }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "service_worker": "background.js"
     },
     "icons": {
         "128": "icon.png"
     },
     "options_ui": {
         "page": "options.html",
-        "open_in_tab": false,
-        "browser_action": {
-            "default_title": "Elecord",
-            "default_icon": "icon.png"
-        }
+        "open_in_tab": false
     }
 }
