@@ -8,5 +8,5 @@
     width: 20px; /* Adjust size as needed */
     height: auto;
     margin-right: 5px; /* Space between logo and link */
-    vertical-align: middle; /* Align logo vertically with the text */
+    vertical-align: text-bottom; /* Align logo vertically with the text */
 }
