@@ -1,12 +1,10 @@
-/* Define a specific class for highlighting */
 .highlight-steam-link {
     color: #49abeb !important;
 }
 
-/* Style for the Steam logo */
 .steam-logo {
-    width: 20px; /* Adjust size as needed */
+    width: 20px;
     height: auto;
-    margin-right: 5px; /* Space between logo and link */
-    vertical-align: text-bottom; /* Align logo vertically with the text */
+    margin-right: 5px;
+    vertical-align: text-bottom;
 }
