@@ -1,3 +1,8 @@
+// pcgamer.com content script
+
+
+// (Highlight Steam links inside articles)
+
 // Select all <a> elements on the page
 const links = document.querySelectorAll('a');
 
@@ -5,31 +10,31 @@ const links = document.querySelectorAll('a');
 links.forEach(link => {
     // Check if the href attribute contains the specified URL
     if (link.href.includes('https://store.steampowered.com/app/')) {
-        // Add a class to highlight the link
+        // Add this class to highlight the link
         link.classList.add('highlight-steam-link');
 
-        // Create an image element
-        const img = document.createElement('img');
-        img.src = chrome.runtime.getURL('assets/steam-logo.png'); // Path to the Steam logo
-        img.alt = 'Steam Logo';
-        img.classList.add('steam-logo');
+        // Create an image element for the Steam logo
+        const steamLogo = document.createElement('img');
+        steamLogo.src = chrome.runtime.getURL('assets/steam-logo.png'); // Path to the Steam logo
+        steamLogo.alt = 'Steam Logo';
+        steamLogo.classList.add('steam-logo');
 
-        // Insert the image inside the link first
-        link.insertBefore(img, link.firstChild);
-        
+        // Insert the image inside the link
+        link.insertBefore(steamLogo, link.firstChild);
     }
 });
 
-// Function to replace the specified element with an image from the og:image meta property
+// (Replace article videos with images)
+
 function replaceElementWithOgImage() {
-    // Select the target element
+    // Select pcgamer custom videos (doesn't include youtube videos)
     const targetElement = document.querySelector('#article-body > div.jwplayer__widthsetter');
 
     // If the target element exists
     if (targetElement) {
         console.log('Target element found:', targetElement);
 
-        // Select the og:image meta tag
+        // Select the article og:image meta tag
         const ogImageMetaTag = document.querySelector('meta[property="og:image"]');
 
         // If the og:image meta tag exists
@@ -38,15 +43,15 @@ function replaceElementWithOgImage() {
             console.log('og:image URL:', ogImageUrl);
 
             // Create a new div element
-            const newDiv = document.createElement('div');
-            newDiv.classList.add('box', 'less-space', 'hero-image-wrapper'); // Add classes
+            const heroDiv = document.createElement('div');
+            heroDiv.classList.add('box', 'less-space', 'hero-image-wrapper'); // Add classes
 
             // Create a new image element
-            const newImg = document.createElement('img');
-            newImg.src = ogImageUrl;
-            newImg.alt = 'Article Image';
-            newImg.style.width = '100%'; // Set appropriate styles
-            newImg.style.height = 'auto';
+            const articleImg = document.createElement('img');
+            articleImg.src = ogImageUrl;
+            articleImg.alt = 'Article Image';
+            articleImg.style.width = '100%'; // Set appropriate styles
+            articleImg.style.height = 'auto';
 
             // Create a figcaption element
             const figCaption = document.createElement('figcaption');
@@ -62,11 +67,11 @@ function replaceElementWithOgImage() {
             figCaption.appendChild(spanCredit);
 
             // Append the image and figcaption to the new div
-            newDiv.appendChild(newImg);
-            newDiv.appendChild(figCaption);
+            heroDiv.appendChild(articleImg);
+            heroDiv.appendChild(figCaption);
 
-            // Replace the target element with the new image element
-            targetElement.parentNode.replaceChild(newDiv, targetElement);
+            // Replace the target video element with the new elements
+            targetElement.parentNode.replaceChild(heroDiv, targetElement);
         } else {
             console.error('og:image meta tag not found');
         }
@@ -75,5 +80,5 @@ function replaceElementWithOgImage() {
     }
 }
 
-// Replace video with image
+// Replace videos with images
 replaceElementWithOgImage();
