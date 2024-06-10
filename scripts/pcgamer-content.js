@@ -10,12 +10,13 @@ links.forEach(link => {
 
         // Create an image element
         const img = document.createElement('img');
-        img.src = chrome.runtime.getURL('steam-logo.png'); // Path to the Steam logo
+        img.src = chrome.runtime.getURL('assets/steam-logo.png'); // Path to the Steam logo
         img.alt = 'Steam Logo';
         img.classList.add('steam-logo');
 
-        // Insert the image before the link
-        link.parentNode.insertBefore(img, link);
+        // Insert the image inside the link first
+        link.insertBefore(img, link.firstChild);
+        
     }
 });
 
