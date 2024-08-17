@@ -1,26 +1,42 @@
 {
-    "name": "Elecord Extension",
-    "version": "1.0.1",
-    "manifest_version": 2,
+    "name": "Elecord",
+    "version": "1.1.0",
+    "manifest_version": 3,
     "description": "Collection of handy tools and tweaks for gamers across the web",
     "homepage_url": "https://github.com/elecordapp/elecord-extension",
     "permissions": [
         "contextMenus",
         "tabs",
-        "storage"
+        "storage",
+        "activeTab"
+    ],
+    "action": {
+        "default_title": "Elecord",
+        "default_icon": {
+            "128": "icons/icon.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://www.pcgamer.com/*"],
+            "js": ["scripts/pcgamer-content.js"],
+            "css": ["styles/pcgamer-styles.css"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["assets/steam-logo.png"],
+            "matches": ["<all_urls>"]
+        }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "service_worker": "background/background.js"
     },
     "icons": {
-        "128": "icon.png"
+        "128": "icons/icon.png"
     },
     "options_ui": {
-        "page": "options.html",
-        "open_in_tab": false,
-        "browser_action": {
-            "default_title": "Elecord Extension",
-            "default_icon": "icon.png"
-        }
+        "page": "options/options.html",
+        "open_in_tab": false
     }
 }

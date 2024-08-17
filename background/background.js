@@ -5,19 +5,27 @@ chrome.contextMenus.create({
     contexts: ["selection"]
 });
 
-// Child context menus
+// Submenus 1
 chrome.contextMenus.create({
-    id: "menu-ggdeals",
-    title: "🔎 Search gg.deals for '%s'",
+    id: "menu-search",
+    title: "🔎 Search '%s'",
     contexts: ["selection"],
     parentId: "menu-elecord"
 });
 
+// Submenus 2
+chrome.contextMenus.create({
+    id: "menu-ggdeals",
+    title: "🟣 gg.deals",
+    contexts: ["selection"],
+    parentId: "menu-search"
+});
+
 chrome.contextMenus.create({
     id: "menu-steam",
-    title: "🔎 Search Steam for '%s'",
+    title: "🔵 Steam",
     contexts: ["selection"],
-    parentId: "menu-elecord"
+    parentId: "menu-search"
 });
 
 // Event listeners

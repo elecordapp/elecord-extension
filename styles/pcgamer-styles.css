@@ -1,0 +1,12 @@
+.highlight-steam-link {
+    color: #49abeb !important;
+    display: inline-flex !important;
+    vertical-align: bottom !important;
+}
+
+.steam-logo {
+    width: 20px !important;
+    height: 20px !important;
+    margin-top: 2px !important;
+    margin-right: 4px !important;
+}

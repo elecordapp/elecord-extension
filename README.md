@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icon.png" width="90" height="90"/>
+    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icons/icon.png" width="90" height="90"/>
 </p>
 
 <h1 align="center">Elecord Extension</h1>
@@ -20,3 +20,6 @@ Collection of handy tools and tweaks for gamers across the web
 
 - [x] gg.deals context menu search
 - [x] Steam context menu search
+- [x] pcgamer.com articles
+    - Highlight Steam links
+    - Replace obtrusive videos with images
