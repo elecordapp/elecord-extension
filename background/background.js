@@ -2,7 +2,10 @@
 
 // context menu
 {
+    // remove all existing context menus
+    chrome.contextMenus.removeAll();
 
+    // create new context menu items
 
     // elecord
     chrome.contextMenus.create({
