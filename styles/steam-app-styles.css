@@ -1,0 +1,94 @@
+:root {
+    --steam-green: #637c25;
+    --steam-white: #c6d4df;
+    --steam-blue: #30485e;
+}
+
+/* key details box */
+.e-details {
+    order: -10;
+
+    /* content area */
+    div:nth-child(2) {
+        min-height: 50px;
+    }
+
+    /* content inner */
+    div div.block_content_inner {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+}
+
+/* __icon */
+.e-details__icon img {
+    filter: brightness(0) invert(1);
+    height: 18px !important;
+    margin: 0 0 1px 0;
+}
+
+/* __name */
+.e-details__name {
+    margin: 0 5px;
+}
+
+/* __vdivide */
+.e-details__vdivide {
+    border-left: 1px solid var(--steam-white);
+    height: 36px;
+    margin: 0;
+}
+
+/* __label */
+.e-details__label {
+    background-color: var(--steam-green);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 50px;
+    min-width: 60px;
+    flex-direction: column;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* --wide */
+.e-details__label--wide {
+    width: fit-content;
+    flex-direction: row;
+    padding-right: 8px;
+}
+
+/* __unreleased */
+.e-details__label__unreleased {
+    width: 100%;
+    margin-right: unset !important;
+    background: var(--steam-blue);
+}
+
+/* __review */
+.e-details__label__review {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 2px;
+
+    .icon {
+        min-height: 0;
+    }
+
+    .e-details__label__review__score {
+        margin: 0 5px 0 0px;
+    }
+
+    .e-details__label__review__summary {
+        margin: 0 0 0 6px;
+        width: min-content;
+    }
+
+}
