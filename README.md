@@ -18,8 +18,18 @@ Collection of handy tools and tweaks for gamers across the web
 
 ## Features
 
-- [x] gg.deals context menu search
-- [x] Steam context menu search
-- [x] pcgamer.com articles
-    - Highlight Steam links
+- [x] Context menu search for games
+    - gg.deals
+    - Steam
+- [x] Context menu redeem game key
+    - Steam
+    - GOG
+    - Epic
+- [x] Steam key details box
+    - Review score
+    - Online play
+    - Hours played
+    - Release date
+- [x] PCGamer.com articles
     - Replace obtrusive videos with images
+    - Highlight Steam links
