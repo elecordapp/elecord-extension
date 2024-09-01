@@ -28,13 +28,13 @@ function restoreOptions() {
 
 // Function to update the context menus based on the options
 function updateContextMenus(options) {
-    // Hide or show "menu-ggdeals" context menu
-    chrome.contextMenus.update("menu-ggdeals", {
+    // Hide or show "menu-search-ggdeals" context menu
+    chrome.contextMenus.update("menu-search-ggdeals", {
         visible: options.optionGGDeals
     });
 
-    // Hide or show "menu-steam" context menu
-    chrome.contextMenus.update("menu-steam", {
+    // Hide or show "menu-search-steam" context menu
+    chrome.contextMenus.update("menu-search-steam", {
         visible: options.optionSteam
     });
 
