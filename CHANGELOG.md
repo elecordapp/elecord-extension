@@ -1,3 +1,21 @@
+## What's Changed in v1.2.0
+* fix readme's icon path
+* steam app key details box in [#5](https://github.com/elecordapp/elecord-extension/pull/5)
+* update extension readme features list
+* update extension manifest
+* create steam app content script
+* create steam app styles
+* create steam app details components
+* move extension icon
+* add tabler icon assets
+* add redeem keys context menu items in [#4](https://github.com/elecordapp/elecord-extension/pull/4)
+* fix 'cannot create item with duplicate id'
+* refactor context menus, add redeem keys menu
+* add git-cliff changelog configuration in [#3](https://github.com/elecordapp/elecord-extension/pull/3)
+* add git-cliff changelog configuration
+
+**Full Changelog**: https://github.com/elecordapp/elecord-extension/compare/v1.1.0...1.2.0
+
 ## What's Changed in v1.1.0
 * Customise pcgamer.com articles in [#2](https://github.com/elecordapp/elecord-extension/pull/2)
 * Fix steam highlighting inline wrapping
