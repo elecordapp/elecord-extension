@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icons/icon.png" width="90" height="90"/>
+    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icon.png" width="90" height="90"/>
 </p>
 
 <h1 align="center">Elecord Extension</h1>
@@ -21,15 +21,15 @@ Collection of handy tools and tweaks for gamers across the web
 - [x] Context menu search for games
     - gg.deals
     - Steam
-- [x] Context menu redeem game key
+- [x] Context menu redeem game keys
     - Steam
     - GOG
     - Epic
-- [x] Steam key details box
+- [x] Steam 'Key Details' box
     - Review score
     - Online play
     - Hours played
     - Release date
-- [x] PCGamer.com articles
+- [x] PCGamer.com article enhancements
     - Replace obtrusive videos with images
     - Highlight Steam links
