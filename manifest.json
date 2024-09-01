@@ -1,6 +1,6 @@
 {
     "name": "Elecord",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "manifest_version": 3,
     "description": "Collection of handy tools and tweaks for gamers across the web",
     "homepage_url": "https://github.com/elecordapp/elecord-extension",
@@ -13,7 +13,7 @@
     "action": {
         "default_title": "Elecord",
         "default_icon": {
-            "128": "icons/icon.png"
+            "128": "icon.png"
         }
     },
     "content_scripts": [
@@ -21,11 +21,38 @@
             "matches": ["*://www.pcgamer.com/*"],
             "js": ["scripts/pcgamer-content.js"],
             "css": ["styles/pcgamer-styles.css"]
+        },
+        {
+            "matches": ["*://store.steampowered.com/*"],
+            "css": ["styles/steam-app-styles.css"]
+        },
+        {
+            "matches": [
+                "*://store.steampowered.com/app/*/*/*",
+                "*://store.steampowered.com/app/*/*"
+            ],
+            "js": ["scripts/steam-app-content.js"],
+            "run_at": "document_end"
         }
     ],
     "web_accessible_resources": [
         {
-            "resources": ["assets/steam-logo.png"],
+            "resources": [
+                "assets/steam-logo.png",
+                "assets/rosette-discount-check.svg",
+                "assets/square-rounded-chevrons-up.svg",
+                "assets/square-rounded-chevron-up.svg",
+                "assets/square-rounded-minus.svg",
+                "assets/square-rounded-chevron-down.svg",
+                "assets/square-rounded-chevrons-down.svg",
+                "assets/poo.svg",
+                "assets/clock-hour-8.svg",
+                "assets/calendar.svg",
+                "components/steam/app/ele-details.html",
+                "components/steam/app/ele-label.html",
+                "components/steam/app/ele-review.html",
+                "components/steam/app/ele-unreleased.html"
+            ],
             "matches": ["<all_urls>"]
         }
     ],
@@ -33,7 +60,7 @@
         "service_worker": "background/background.js"
     },
     "icons": {
-        "128": "icons/icon.png"
+        "128": "icon.png"
     },
     "options_ui": {
         "page": "options/options.html",
