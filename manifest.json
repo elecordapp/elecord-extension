@@ -6,9 +6,11 @@
     "homepage_url": "https://github.com/elecordapp/elecord-extension",
     "permissions": [
         "contextMenus",
-        "tabs",
-        "storage",
-        "activeTab"
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*.steampowered.com/*",
+        "*://www.pcgamer.com/*"
     ],
     "action": {
         "default_title": "Elecord",
