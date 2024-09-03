@@ -4,6 +4,12 @@
     --steam-blue: #30485e;
 }
 
+/* right column */
+.e-rightcol {
+    display: flex;
+    flex-direction: column;
+}
+
 /* key details box */
 .e-details {
     order: -10;

@@ -2,6 +2,9 @@
 
 const componentsLocation = '/components/steam/app/';
 
+let rightcol = {
+    location: "div.rightcol.game_meta_data",
+}
 let feature = {
     element: document.querySelectorAll('div.label')
 };
@@ -38,7 +41,11 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
 
     // key details box
     {
-        addElement('ele-details.html', 'div.rightcol.game_meta_data', []);
+        // modify existing rightcol with flex
+        rightcol.element = document.querySelector(rightcol.location)
+        rightcol.element.classList.add('e-rightcol');
+        // add key details to rightcol
+        addElement('ele-details.html', rightcol.location, []);
         WriteLine('Created key details box');
     };
 
