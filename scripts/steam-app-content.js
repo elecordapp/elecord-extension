@@ -67,30 +67,40 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
             review.summary.value = review.summary.element[recentReview].textContent.trim();
 
             switch (review.summary.value) {
+                // (icon displayed, review score, review count)
                 case "Overwhelmingly Positive":
-                    setIcon('review', 'rosette-discount-check.svg'); // ✔
+                    // ✔ 95-100%, 500+
+                    setIcon('review', 'rosette-discount-check.svg');
                     break;
                 case "Very Positive":
-                    setIcon('review', 'square-rounded-chevrons-up.svg'); // »
+                    // » 80-94%, 500+ | 80-100% 50-499
+                    setIcon('review', 'square-rounded-chevrons-up.svg');
                     break;
                 case "Positive":
-                    setIcon('review', 'square-rounded-chevron-up.svg'); // >
+                    // > 80-100%, 10-49
+                    setIcon('review', 'square-rounded-chevron-up.svg');
                     break;
                 case "Mostly Positive":
-                    setIcon('review', 'square-rounded-chevron-up.svg'); // >
+                    // > 70-79%, any
+                    setIcon('review', 'square-rounded-chevron-up.svg');
                     break;
                 case "Mixed":
-                    setIcon('review', 'square-rounded-minus.svg'); // -
+                    // - 40-69%, any
+                    setIcon('review', 'square-rounded-minus.svg');
                     break;
                 case "Mostly Negative":
-                    setIcon('review', 'square-rounded-chevron-down.svg'); // <
+                    // < 20-39%, any
+                    setIcon('review', 'square-rounded-chevron-down.svg');
                     break;
                 case "Negative":
-                    setIcon('review', 'square-rounded-chevrons-down.svg'); // «
+                    // « 0-19%, 10-49
+                    setIcon('review', 'square-rounded-chevrons-down.svg');
                     break;
                 default:
-                // Very Negative, Overwhelmingly Negative
-                // poo.svg
+                // Very Negative
+                // poo 0-19%, 50-499
+                // Overwhelmingly Negative
+                // poo 0-19%, 500+
             }
 
             // add to key details
@@ -194,6 +204,7 @@ function addElement(fileName, targetSelector, content) {
         // insert the new HTML content into the page at the target selector
         const targetElement = document.querySelector(targetSelector);
         if (targetElement) {
+            // "beforeend" after last child, or "afterbegin" before first child.
             targetElement.insertAdjacentHTML('beforeend', newHtml);
         } else {
             console.error(`"${targetSelector}" not found!`);
