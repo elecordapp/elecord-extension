@@ -78,6 +78,7 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
             // set review summary title
             review.summary.value = review.summary.element[recentReview].textContent.trim();
 
+            // set review icon
             switch (review.summary.value) {
                 // (icon displayed, review score, review count)
                 case "Overwhelmingly Positive":
@@ -113,6 +114,12 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
                 // poo 0-19%, 50-499
                 // Overwhelmingly Negative
                 // poo 0-19%, 500+
+            }
+
+            // handle no review score
+            if (review.score.value === "Need"/* more reviews... */) {
+                setIcon('review', 'message.svg');
+                review.score.value = "";
             }
 
             // add to key details
