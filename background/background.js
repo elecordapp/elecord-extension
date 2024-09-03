@@ -44,7 +44,7 @@
         // redeem
         chrome.contextMenus.create({
             id: "menu-redeem",
-            title: "🔑 Redeem %s",
+            title: "🔑 Redeem",
             contexts: ["all"],
             parentId: "menu-elecord"
         });
