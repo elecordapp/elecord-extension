@@ -51,14 +51,19 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
 
     // custom detail: ⏳unreleased
     {
+        // unreleased
         if (unreleased.element) {
             unreleased.state = true;
-            // add to key details
-            addElement('ele-unreleased.html', '.e-details div div.block_content_inner', []);
-        }
+            addElement('ele-unreleased.html', '.e-details div div.block_content_inner', ['Unreleased']);
+        } else 
+        // newly released
+        if (!review.summary.element[0]) {
+            unreleased.state = true;
+            addElement('ele-unreleased.html', '.e-details div div.block_content_inner', ['New Release']);
+        };
     };
 
-    // continue if released
+    // continue if fully released
     if (unreleased.state === false) {
 
         // custom detail: ✅review
