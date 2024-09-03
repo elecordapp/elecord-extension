@@ -12,11 +12,9 @@
         "*://*.steampowered.com/*",
         "*://www.pcgamer.com/*"
     ],
-    "action": {
-        "default_title": "Elecord",
-        "default_icon": {
-            "128": "icon.png"
-        }
+    "background": {
+        "service_worker": "background/background.js",
+        "scripts": ["background/background.js"]
     },
     "content_scripts": [
         {
@@ -58,14 +56,17 @@
             "matches": ["<all_urls>"]
         }
     ],
-    "background": {
-        "service_worker": "background/background.js"
-    },
-    "icons": {
-        "128": "icon.png"
-    },
     "options_ui": {
         "page": "options/options.html",
         "open_in_tab": false
+    },
+    "action": {
+        "default_title": "Elecord",
+        "default_icon": {
+            "128": "icon.png"
+        }
+    },
+    "icons": {
+        "128": "icon.png"
     }
 }
