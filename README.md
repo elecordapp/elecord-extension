@@ -53,3 +53,9 @@ Collection of handy tools and tweaks for gamers across the web
 3. Visit the Firefox debugging page `about:debugging#/runtime/this-firefox`
 4. Click the **'Load Temporary Add-on…'** button
 5. Select the file `elecord-extension-main\manifest.json` to install it
+
+## License
+
+The elecord-extension is licensed under [AGPL-3.0-only](https://github.com/elecordapp/elecord-extension/blob/main/LICENSE).
+
+The elecord logo is [licensed](https://github.com/elecordapp/elecord-extension/blob/main/LOGO_LICENSE.txt) seperately.
