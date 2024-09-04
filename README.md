@@ -1,5 +1,5 @@
 <p align="left">
-    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icon.png" width="90" height="90"/>
+    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icons/icon-128.png" width="90" height="90"/>
 </p>
 
 <h1 align="left">Elecord Extension</h1>
