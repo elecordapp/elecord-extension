@@ -1,5 +1,5 @@
 {
-    "name": "Elecord",
+    "name": "elecord",
     "version": "1.2.0",
     "manifest_version": 3,
     "description": "Collection of handy tools and tweaks for gamers across the web",
@@ -52,14 +52,16 @@
                 "components/steam/app/ele-details.html",
                 "components/steam/app/ele-label.html",
                 "components/steam/app/ele-review.html",
-                "components/steam/app/ele-unreleased.html"
+                "components/steam/app/ele-unreleased.html",
+                "assets/external-link.svg",
+                "assets/dots-circle-horizontal.svg"
             ],
             "matches": ["<all_urls>"]
         }
     ],
     "options_ui": {
         "page": "options/options.html",
-        "open_in_tab": false
+        "open_in_tab": true
     },
     "action": {
         "default_icon": {
@@ -67,7 +69,8 @@
             "32": "icons/icon-32.png",
             "48": "icons/icon-48.png",
             "128": "icons/icon-128.png"
-        }
+        },
+        "default_popup": "options/options.html"
     },
     "icons": {
         "128": "icons/icon-128.png",
