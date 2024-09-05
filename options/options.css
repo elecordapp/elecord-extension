@@ -12,62 +12,129 @@
  */
 
 body {
+    display: flex;
+    justify-content: center;
     font-family: sans-serif;
     background-color: #222;
     color: #fff;
+    font-size: 110%;
 }
 
 h1 {
-    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 h2 {
-    margin-bottom: 1rem;
+    margin-top: 3rem;
+}
+
+h3 {
+    margin: 2rem 0 0 0;
+    text-decoration: underline;
 }
 
 a {
     color: #fff;
-    text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
+/*** [containers] ***/
 
-svg {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    margin-left: 0.2rem;
-    fill: #fff;
-}
-
-label {
-    display: block;
-}
-
-.option {
-    margin-bottom: 1rem;
-}
-
-.container {
-    padding-top: 2vw;
-    padding-left: 5vw;
-    padding-bottom: 5vw;
-    
-}
-
-.github-link {
-    margin-top: 1rem;
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
+.e-container {
+    margin-top: 10vh;
+    padding: 0.8rem 0 4rem 3rem;
+    width: 500px;
+    outline: solid 1px #444;
     background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.github-link:hover {
-    background-color: #555;
+.e-container__title {
+    display: flex;
+    align-items: center;
+    margin-top: 1.1rem;
+}
+
+.e-container__title__icon {
+    margin-right: 0.8em;
+    transform: translateY(-0.1rem);
+}
+
+.e-container__description {
+    width: 400px;
+}
+
+.e-container__header {
+    display: flex;
+    align-items: baseline;
+}
+
+.e-container__header__icon {
+    margin-right: 0.2em;
+}
+
+.e-container__header__icon--svg {
+    filter: invert(1);
+}
+
+.e-container__section {
+    margin-bottom: 3rem;
+}
+
+.e-container__section__sub-section {
+    margin-bottom: 1.2rem;
+}
+
+/*** [options] ***/
+
+.e-option {
+    display: flex;
+    margin: 0.7rem 0.4rem;
+    user-select: none;
+    transform: translateY(-0.4rem);
+}
+
+/* label for input */
+.e-option__label {
+    font-family: Consolas, "courier new";
+    color: #f1f1f1;
+    background-color: #575757;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 80%;
+    margin: 0 4px;
+}
+
+.e-option__label:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+}
+
+.e-option__checkbox:hover {
+    cursor: pointer;
+}
+
+/* label when input checked */
+.e-option__checkbox:checked+.e-option__label {
+    background-color: rgb(15, 86, 167);
+}
+
+/*** [footer] ***/
+
+.e-footer {
+    margin-top: 5rem;
+}
+
+/* github repo link */
+.e-footer__github-link {
+    display: flex;
+    align-items: center;
+    margin: 0 2.5rem;
+    float: right;
+}
+
+/* icons */
+.e-footer__icon {
+    width: 18px;
+    filter: invert(1);
 }
