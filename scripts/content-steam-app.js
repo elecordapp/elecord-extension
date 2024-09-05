@@ -13,7 +13,7 @@
 
 // steampowered.com content script
 
-const componentsLocation = '/components/steam/app/';
+const viewsDir = '/views/steam/app/';
 
 let rightcol = {
     location: "div.rightcol.game_meta_data",
@@ -33,18 +33,18 @@ let review = {
     summary: {
         element: document.querySelectorAll('#userReviews span.game_review_summary'),
         value: "Unknown",
-        icon: chrome.runtime.getURL('assets/poo.svg')
+        icon: chrome.runtime.getURL('media/tabler/poo.svg')
     }
 };
 let hours = {
     element: document.querySelector('div.hours_played'),
     value: "0 hrs",
-    icon: chrome.runtime.getURL('assets/clock-hour-8.svg')
+    icon: chrome.runtime.getURL('media/tabler/clock-hour-8.svg')
 };
 let date = {
     element: document.querySelector('div.release_date div.date'),
     value: "1970",
-    icon: chrome.runtime.getURL('assets/calendar.svg')
+    icon: chrome.runtime.getURL('media/tabler/calendar.svg')
 }
 
 // check if hardware app
@@ -205,25 +205,25 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
 };
 
 /**
- * Fetches an HTML component from the extension's components folder.
- * @param {string} fileName The name of the HTML file to fetch.
- * @returns {Promise<string>} A promise that resolves with the HTML content of the file.
+ * Fetches an HTML component from the extension's views folder.
+ * @param {string} fileName The name of the HTML view to fetch.
+ * @returns {Promise<string>} A promise that resolves with the HTML files content.
  */
 function fetchHTML(fileName) {
-    // componentsLocation is defined at the top of this file
-    return fetch(chrome.runtime.getURL(componentsLocation + fileName))
+    // viewsDir is defined at the top of this file
+    return fetch(chrome.runtime.getURL(viewsDir + fileName))
         .then(response => response.text())
         .catch(err => console.error("Error fetching HTML:", err));
 };
 
 /**
  * Creates a child element and inserts it into the page.
- * @param {string} fileName The name of the HTML component file to use.
+ * @param {string} fileName The name of the HTML view to use.
  * @param {string} targetSelector The CSS selector for the parent element.
- * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML content.
+ * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML contents.
  */
 function addElement(fileName, targetSelector, content) {
-    // fetch the HTML content of the component file
+    // fetch the HTML contents of the view
     fetchHTML(fileName).then(htmlContent => {
         // replace placeholders like {0}, {1}, etc., with corresponding values from content array
         let newHtml = htmlContent;
@@ -233,7 +233,7 @@ function addElement(fileName, targetSelector, content) {
             newHtml = newHtml.replace(placeholder, value);
         });
 
-        // insert the new HTML content into the page at the target selector
+        // insert the new HTML contents into the page at the target selector
         const targetElement = document.querySelector(targetSelector);
         if (targetElement) {
             // "beforeend" after last child, or "afterbegin" before first child.
@@ -251,7 +251,7 @@ function addElement(fileName, targetSelector, content) {
  */
 function setIcon(component, icon) {
     if (component == "review") {
-        review.summary.icon = chrome.runtime.getURL(`assets/${icon}`);
+        review.summary.icon = chrome.runtime.getURL(`media/tabler/${icon}`);
     }
 };
 

@@ -28,7 +28,7 @@ links.forEach(link => {
 
         // Create an image element for the Steam logo
         const steamLogo = document.createElement('img');
-        steamLogo.src = chrome.runtime.getURL('assets/steam-logo.png'); // Path to the Steam logo
+        steamLogo.src = chrome.runtime.getURL('media/steam/logo.png'); // Path to the Steam logo
         steamLogo.alt = 'Steam Logo';
         steamLogo.classList.add('steam-logo');
 
