@@ -2,47 +2,122 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Options</title>
     <link rel="stylesheet" href="options.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Options</h1>
-        <h3>Context Menu</h3>
-        <div class="option">
-            <label>
-                <input type="checkbox" id="option-ggdeals">
-                Enable "Search gg.deals"
-            </label>
+
+    <div class="e-container">
+
+        <!-- header -->
+        <div class="e-container__title">
+            <img src="../icons/icon-48.png" class="e-container__title__icon">
+            <h1>elecord extension&nbsp;</h1>
+            <p id="version">1.0.0</p>
         </div>
-        <div class="option">
-            <label>
-                <input type="checkbox" id="option-steam">
-                Enable "Search Steam"
-            </label>
+        
+        <!-- description -->
+        <p id="description" class="e-container__description">Description text</p>
+
+        <!-- options -->
+        <div class="e-container__header">
+            <img src="../assets/dots-circle-horizontal.svg" class="e-container__header__icon e-container__header__icon--svg">
+            <h2>Options</h2>
         </div>
 
-        <div class="github-link">
-            <a href="https://github.com/elecordapp/elecord-extension" target="_blank">
-                View extension source on GitHub
-                <svg viewbox="0 0 48 48">
-                    <path d="M36 24c-1.2 0-2 0.8-2 2v12c0 1.2-0.8 2-2 2h-22c-1.2
-                    0-2-0.8-2-2v-22c0-1.2 0.8-2 2-2h12c1.2 0 2-0.8 2-2s-0.8-2-2-2h-12c-3.4
-                    0-6 2.6-6 6v22c0 3.4 2.6 6 6 6h22c3.4 0 6-2.6
-                    6-6v-12c0-1.2-0.8-2-2-2z"></path>
-                    <path d="M43.8 5.2c-0.2-0.4-0.6-0.8-1-1-0.2-0.2-0.6-0.2-0.8-0.2h-12c-1.2
-                    0-2 0.8-2 2s0.8 2 2 2h7.2l-18.6 18.6c-0.8 0.8-0.8 2 0 2.8 0.4 0.4 0.8
-                    0.6 1.4 0.6s1-0.2 1.4-0.6l18.6-18.6v7.2c0 1.2 0.8 2 2 2s2-0.8
-                    2-2v-12c0-0.2 0-0.6-0.2-0.8z"></path>
-                </svg>
-            </a>
+        <!-- context menu -->
+        <div class="e-container__section">
+            <h3>Context Menu</h3>
+
+            <div class="e-container__section__sub-section">
+                <p>🔎Search Games</p>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-search-ggdeals" class="e-option__checkbox">
+                    <label for="opt-search-ggdeals" class="e-option__label">Show 'Search gg.deals'</label>
+                </div>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-search-steam" class="e-option__checkbox">
+                    <label for="opt-search-steam" class="e-option__label">Show 'Search Steam'</label>
+                </div>
+            </div>
+
+            <div class="e-container__section__sub-section">
+                <p>🔑Redeem Keys</p>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-redeem-steam" class="e-option__checkbox">
+                    <label for="opt-redeem-steam" class="e-option__label">Show 'Redeem Steam'</label>
+                </div>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-redeem-gog" class="e-option__checkbox">
+                    <label for="opt-redeem-gog" class="e-option__label">Show 'Redeem GOG'</label>
+                </div>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-redeem-epic" class="e-option__checkbox">
+                    <label for="opt-redeem-epic" class="e-option__label">Show 'Redeem Epic'</label>
+                </div>
+            </div>
+
         </div>
+
+        <!-- steam store -->
+        <div class="e-container__section">
+            <h3>Steam Store</h3>
+
+            <div class="e-container__section__sub-section">
+                <p>📗Key Details Info</p>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-steam-details" class="e-option__checkbox">
+                    <label for="opt-steam-details" class="e-option__label">Display 'Key Details' box</label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- pc gamer -->
+        <div class="e-container__section">
+            <h3>PC Gamer</h3>
+
+            <div class="e-container__section__sub-section">
+                <p>📰Article enhancements</p>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-pcgamer-steamicon" class="e-option__checkbox">
+                    <label for="opt-pcgamer-steamicon" class="e-option__label">Display 'Steam icon' for store links</label>
+                </div>
+
+                <div class="e-option">
+                    <input type="checkbox" id="opt-pcgamer-videos" class="e-option__checkbox">
+                    <label for="opt-pcgamer-videos" class="e-option__label">Replace obtrusive videos with images</label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- footer -->
+        <footer class="e-footer">
+            <div class="e-footer__github-link">
+                Open source on&nbsp;
+                <a href="https://github.com/elecordapp/elecord-extension" target="_blank">
+                    GitHub
+                </a>
+                &nbsp;
+                <img src="../assets/external-link.svg" class="e-footer__icon">
+            </div>
+        </footer>
+
     </div>
 
-
-
+    <!-- script -->
     <script src="options.js"></script>
+
 </body>
 
 </html>
