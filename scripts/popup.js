@@ -10,3 +10,6 @@
  * See the GNU Affero General Public License for more details:
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
+
+// display extension version
+document.getElementById("version").textContent = chrome.runtime.getManifest().version;
