@@ -11,69 +11,66 @@
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
 
+// options script
 
-// display extension version
-document.getElementById("version").textContent = chrome.runtime.getManifest().version;
-// display extension description
-document.getElementById("description").textContent = chrome.runtime.getManifest().description;
-
-
-// function to save the options to storage
-function saveOptions() {
-    // Get the values of the toggle boxes
-    var optionGGDeals = document.getElementById("option-ggdeals").checked;
-    var optionSteam = document.getElementById("option-steam").checked;
-
-    // save the options to storage
-    chrome.storage.sync.set({
-        optionGGDeals: optionGGDeals,
-        optionSteam: optionSteam
-    }, function () {
-        // update the context menus based on the options
-        updateContextMenus({
-            optionGGDeals: optionGGDeals,
-            optionSteam: optionSteam
-        });
-    });
+// page content
+{
+    // display extension version
+    document.getElementById("version").textContent = chrome.runtime.getManifest().version;
+    // display extension description
+    document.getElementById("description").textContent = chrome.runtime.getManifest().description;
 }
 
-// function to restore the options from storage
-function restoreOptions() {
-    // set the values of the toggle boxes based on the options, applies defaults if not set
-    chrome.storage.sync.get(["optionGGDeals", "optionSteam"], function (options) {
-        document.getElementById("option-ggdeals").checked = options.optionGGDeals || true;
-        document.getElementById("option-steam").checked = options.optionSteam || true;
+// page logic
+{
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // display state of previously saved options
+        chrome.storage.sync.get(optionKeys, (result) => {
+            optionKeys.forEach(id => {
+                const toggle = document.getElementById(id);
+                if (toggle) {
+                    // set toggle state based on stored preference
+                    writeLine(`${id} loaded as ${result[id] ? 'enabled' : 'disabled'}`);
+                    toggle.checked = result[id] || false;
+                    // set dev-mode class when opt-dev-mode enabled
+                    if (id === 'opt-dev-mode' && result[id]) {
+                        const parent = toggle.parentElement.parentElement;
+                        parent.classList.add('e-dev-mode--active');
+                    }
+                }
+            });
+        });
+
+        // save changes made to options toggles
+        optionKeys.forEach(id => {
+            const toggle = document.getElementById(id);
+            if (toggle) {
+                // add change event listeners for each toggle
+                toggle.addEventListener('change', () => {
+                    // save updated toggle preference in chrome.storage
+                    const update = {};
+                    update[id] = toggle.checked;
+                    chrome.storage.sync.set(update, () => {
+                        writeLine(`${id} is now ${toggle.checked ? 'enabled' : 'disabled'}`);
+                    });
+                    // check dev-mode toggle
+                    if (id === 'opt-dev-mode') {
+                        const parent = toggle.parentElement.parentElement;
+                        if (toggle.checked) {
+                            parent.classList.add('e-dev-mode--active');
+                        } else {
+                            parent.classList.remove('e-dev-mode--active');
+                        }
+                    }
+                });
+            }
+        });
+
+        // on reload clicked, reload extension
+        document.getElementById('reload').addEventListener('click', () => {
+            chrome.runtime.reload();
+        });
+
     });
 }
-
-// function to update the context menus based on the options
-function updateContextMenus(options) {
-    // hide or show "menu-search-ggdeals" context menu
-    chrome.contextMenus.update("menu-search-ggdeals", {
-        visible: options.optionGGDeals
-    });
-
-    // hide or show "menu-search-steam" context menu
-    chrome.contextMenus.update("menu-search-steam", {
-        visible: options.optionSteam
-    });
-
-    // hide or show "menu-elecord" parent context menu
-    if (!options.optionGGDeals && !options.optionSteam) {
-        chrome.contextMenus.update("menu-elecord", {
-            visible: false
-        });
-    } else {
-        chrome.contextMenus.update("menu-elecord", {
-            visible: true
-        });
-    }
-}
-
-// add event listener for when the options are changed
-document.getElementById("option-ggdeals").addEventListener("change", saveOptions);
-document.getElementById("option-steam").addEventListener("change", saveOptions);
-
-// restore the options when the page is loaded
-document.addEventListener("DOMContentLoaded", restoreOptions);
-
