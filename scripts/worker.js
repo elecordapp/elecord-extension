@@ -13,151 +13,190 @@
 
 // background script
 
-// context menu
+// load utilities script directly
+importScripts('utils.js');
+writeLine('Running service worker');
+
+// extension logic
 {
-    // remove all existing context menus
-    chrome.contextMenus.removeAll();
+    chrome.runtime.onInstalled.addListener(() => {
+        // chrome.runtime.setUninstallURL('https://example.com/uninstall-survey');
 
-    // create new context menu items
-
-    // elecord
-    chrome.contextMenus.create({
-        id: "menu-elecord",
-        title: "Elecord",
-        contexts: ["all"]
+        // set default options on first install
+        chrome.storage.sync.get(null, (items) => {
+            // check number of items in returned object is zero
+            if (Object.keys(items).length === 0) {
+                // set default options
+                optionKeys.forEach((key) => {
+                    chrome.storage.sync.set({ [key]: true });
+                    chrome.storage.sync.set({ 'opt-dev-mode': false });
+                });
+            }
+        });
     });
-
-    {
-        // search
-        chrome.contextMenus.create({
-            id: "menu-search",
-            title: "🔎 Search '%s'",
-            contexts: ["selection"],
-            parentId: "menu-elecord"
-        });
-
-        {
-            // gg.deals
-            chrome.contextMenus.create({
-                id: "menu-search-ggdeals",
-                title: "🔥 gg.deals",
-                contexts: ["selection"],
-                parentId: "menu-search"
-            });
-
-            // steam
-            chrome.contextMenus.create({
-                id: "menu-search-steam",
-                title: "🔵 Steam",
-                contexts: ["selection"],
-                parentId: "menu-search"
-            });
-        };
-
-        // redeem
-        chrome.contextMenus.create({
-            id: "menu-redeem",
-            title: "🔑 Redeem",
-            contexts: ["all"],
-            parentId: "menu-elecord"
-        });
-
-        {
-            // steam
-            chrome.contextMenus.create({
-                id: "menu-redeem-steam",
-                title: "🔵 Steam",
-                contexts: ["all"],
-                parentId: "menu-redeem"
-            });
-
-            // gog
-            chrome.contextMenus.create({
-                id: "menu-redeem-gog",
-                title: "🟣 GOG",
-                contexts: ["all"],
-                parentId: "menu-redeem"
-            });
-
-            // epic
-            chrome.contextMenus.create({
-                id: "menu-redeem-epic",
-                title: "⚪️ Epic",
-                contexts: ["all"],
-                parentId: "menu-redeem"
-            });
-
-            // // xbox
-            // chrome.contextMenus.create({
-            //     id: "menu-redeem-xbox",
-            //     title: "🟢 Xbox",
-            //     contexts: ["all"],
-            //     parentId: "menu-redeem"
-            // });
-
-            // // ea
-            // chrome.contextMenus.create({
-            //     id: "menu-redeem-ea",
-            //     title: "🔴 EA",
-            //     contexts: ["all"],
-            //     parentId: "menu-redeem"
-            // });
-
-            // // ubisoft
-            // chrome.contextMenus.create({
-            //     id: "menu-redeem-ubisoft",
-            //     title: "🟡 Ubi",
-            //     contexts: ["all"],
-            //     parentId: "menu-redeem"
-            // });
-        };
-
-    };
 };
 
+    });
 
-// event listeners
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+// context menu
+{
+    // create context menu
+    {
+        // remove all existing context menus
+        chrome.contextMenus.removeAll();
 
-    switch (info.menuItemId) {
-        // search
-        case "menu-search-ggdeals":
-            encodeURL('https://gg.deals/games/?view=list&title=', info.selectionText);
-            break;
-        case "menu-search-steam":
-            encodeURL('https://store.steampowered.com/search/?term=', info.selectionText);
-            break;
+        // create new context menu items
+        getOptions((options) => {
 
-        // redeem
-        case "menu-redeem-steam":
-            encodeURL('https://store.steampowered.com/account/registerkey?key=', info.selectionText);
-            break;
-        case "menu-redeem-gog":
-            encodeURL('https://www.gog.com/en/redeem/', info.selectionText);
-            break;
-        case "menu-redeem-epic":
-            encodeURL('https://store.epicgames.com/en-US/redeem?code=', info.selectionText);
-            break;
-    }
+            // elecord
+            chrome.contextMenus.create({
+                id: "menu-elecord",
+                title: "Elecord",
+                contexts: ["all"]
+            });
 
-    /**
-     * Encodes a given URL with an optional selection text and
-     * creates a new tab with the resulting URL.
-     *
-     * @param {string} url The base URL to use.
-     * @param {string} [selection] Optional selection text to encode and append.
-     */
-    function encodeURL(url, selection) {
+            // submenus
+            {
+                // search
+                if (options['opt-search-ggdeals'] || options['opt-search-steam']) {
+                    chrome.contextMenus.create({
+                        id: "menu-search",
+                        title: "🔎 Search '%s'",
+                        contexts: ["selection"],
+                        parentId: "menu-elecord"
+                    });
+                    // gg.deals
+                    if (options['opt-search-ggdeals']) {
+                        chrome.contextMenus.create({
+                            id: "menu-search-ggdeals",
+                            title: "🔥 gg.deals",
+                            contexts: ["selection"],
+                            parentId: "menu-search"
+                        });
+                    }
+                    // steam
+                    if (options['opt-search-steam']) {
+                        chrome.contextMenus.create({
+                            id: "menu-search-steam",
+                            title: "🔵 Steam",
+                            contexts: ["selection"],
+                            parentId: "menu-search"
+                        });
+                    }
+                }
 
-        // encode url with or without selection
-        let urlEncoded = url;
-        if (selection) {
-            urlEncoded = url + encodeURIComponent(selection);
-        }
+                // redeem
+                if (options['opt-redeem-steam'] || options['opt-redeem-gog'] || options['opt-redeem-epic']) {
+                    chrome.contextMenus.create({
+                        id: "menu-redeem",
+                        title: "🔑 Redeem",
+                        contexts: ["all"],
+                        parentId: "menu-elecord"
+                    });
+                    // steam
+                    if (options['opt-redeem-steam']) {
+                        chrome.contextMenus.create({
+                            id: "menu-redeem-steam",
+                            title: "🔵 Steam",
+                            contexts: ["all"],
+                            parentId: "menu-redeem"
+                        });
+                    }
+                    // gog
+                    if (options['opt-redeem-gog']) {
+                        chrome.contextMenus.create({
+                            id: "menu-redeem-gog",
+                            title: "🟣 GOG",
+                            contexts: ["all"],
+                            parentId: "menu-redeem"
+                        });
+                    }
+                    // epic
+                    if (options['opt-redeem-epic']) {
+                        chrome.contextMenus.create({
+                            id: "menu-redeem-epic",
+                            title: "⚪️ Epic",
+                            contexts: ["all"],
+                            parentId: "menu-redeem"
+                        });
+                    }
+                    // // xbox
+                    // if (options['opt-redeem-xbox']) {
+                    // chrome.contextMenus.create({
+                    //     id: "menu-redeem-xbox",
+                    //     title: "🟢 Xbox",
+                    //     contexts: ["all"],
+                    //     parentId: "menu-redeem"
+                    // });
+                    // }
 
-        // create new tab
-        chrome.tabs.create({ url: urlEncoded });
+                    // // ea
+                    // if (options['opt-redeem-ea']) {
+                    // chrome.contextMenus.create({
+                    //     id: "menu-redeem-ea",
+                    //     title: "🔴 EA",
+                    //     contexts: ["all"],
+                    //     parentId: "menu-redeem"
+                    // });
+                    // }
 
+                    // // ubisoft
+                    // if (options['opt-redeem-ubisoft']) {
+                    // chrome.contextMenus.create({
+                    //     id: "menu-redeem-ubisoft",
+                    //     title: "🟡 Ubi",
+                    //     contexts: ["all"],
+                    //     parentId: "menu-redeem"
+                    // });
+                    // }
+                }
+            };
+        });
     };
 
-});
+    // context menu event listeners
+    chrome.contextMenus.onClicked.addListener((info, tab) => {
+
+        switch (info.menuItemId) {
+            // search
+            case "menu-search-ggdeals":
+                encodeURL('https://gg.deals/games/?view=list&title=', info.selectionText);
+                break;
+            case "menu-search-steam":
+                encodeURL('https://store.steampowered.com/search/?term=', info.selectionText);
+                break;
+
+            // redeem
+            case "menu-redeem-steam":
+                encodeURL('https://store.steampowered.com/account/registerkey?key=', info.selectionText);
+                break;
+            case "menu-redeem-gog":
+                encodeURL('https://www.gog.com/en/redeem/', info.selectionText);
+                break;
+            case "menu-redeem-epic":
+                encodeURL('https://store.epicgames.com/en-US/redeem?code=', info.selectionText);
+                break;
+        }
+
+        /**
+         * Encodes a given URL with an optional selection text and
+         * creates a new tab with the resulting URL.
+         *
+         * @param {string} url The base URL to use.
+         * @param {string} [selection] Optional selection text to encode and append.
+         */
+        function encodeURL(url, selection) {
+
+            // encode url with or without selection
+            let urlEncoded = url;
+            if (selection) {
+                urlEncoded = url + encodeURIComponent(selection);
+            }
+
+            // create new tab
+            chrome.tabs.create({ url: urlEncoded });
+
+        };
+
+    });
+};
