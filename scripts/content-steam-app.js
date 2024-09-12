@@ -11,46 +11,94 @@
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
 
-// steampowered.com content script
+// steam app content script
 
-const viewsDir = '/views/steam/app/';
+function main() {
 
-let rightcol = {
-    location: "div.rightcol.game_meta_data",
-}
-let feature = {
-    element: document.querySelectorAll('div.label')
-};
-let unreleased = {
-    element: document.querySelector('div.game_area_comingsoon'),
-    state: false
-};
-let review = {
-    score: {
-        element: document.querySelectorAll('#userReviews div.user_reviews_summary_row'),
-        value: "0%"
-    },
-    summary: {
-        element: document.querySelectorAll('#userReviews span.game_review_summary'),
-        value: "Unknown",
-        icon: chrome.runtime.getURL('media/tabler/poo.svg')
-    }
-};
-let hours = {
-    element: document.querySelector('div.hours_played'),
-    value: "0 hrs",
-    icon: chrome.runtime.getURL('media/tabler/clock-hour-8.svg')
-};
-let date = {
-    element: document.querySelector('div.release_date div.date'),
-    value: "1970",
-    icon: chrome.runtime.getURL('media/tabler/calendar.svg')
-}
+    const viewsDir = '/views/steam/app/';
 
-// check if hardware app
-if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All Hardware") {
-    WriteLine('Skipping hardware app');
-} else {
+    let rightcol = {
+        location: "div.rightcol.game_meta_data",
+    };
+    let feature = {
+        element: document.querySelectorAll('div.label')
+    };
+    let unreleased = {
+        element: document.querySelector('div.game_area_comingsoon'),
+        state: false
+    };
+    let review = {
+        score: {
+            element: document.querySelectorAll('#userReviews div.user_reviews_summary_row'),
+            value: "0%"
+        },
+        summary: {
+            element: document.querySelectorAll('#userReviews span.game_review_summary'),
+            value: "Unknown",
+            icon: chrome.runtime.getURL('media/tabler/poo.svg')
+        }
+    };
+    let hours = {
+        element: document.querySelector('div.hours_played'),
+        value: "0 hrs",
+        icon: chrome.runtime.getURL('media/tabler/clock-hour-8.svg')
+    };
+    let date = {
+        element: document.querySelector('div.release_date div.date'),
+        value: "1970",
+        icon: chrome.runtime.getURL('media/tabler/calendar.svg')
+    };
+
+    /**
+     * Fetches an HTML component from the extension's views folder.
+     * @param {string} fileName The name of the HTML view to fetch.
+     * @returns {Promise<string>} A promise that resolves with the HTML files content.
+     */
+    function fetchHTML(fileName) {
+        // viewsDir is defined at the top of this file
+        return fetch(chrome.runtime.getURL(viewsDir + fileName))
+            .then(response => response.text())
+            .catch(err => console.error("Error fetching HTML:", err));
+    };
+
+    /**
+     * Creates a child element and inserts it into the page.
+     * @param {string} fileName The name of the HTML view to use.
+     * @param {string} targetSelector The CSS selector for the parent element.
+     * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML contents.
+     */
+    function addElement(fileName, targetSelector, content) {
+        // fetch the HTML contents of the view
+        fetchHTML(fileName).then(htmlContent => {
+            // replace placeholders like {0}, {1}, etc., with corresponding values from content array
+            let newHtml = htmlContent;
+            content.forEach((value, index) => {
+                // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
+                const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
+                newHtml = newHtml.replace(placeholder, value);
+            });
+
+            // insert the new HTML contents into the page at the target selector
+            const targetElement = document.querySelector(targetSelector);
+            if (targetElement) {
+                // "beforeend" after last child, or "afterbegin" before first child.
+                targetElement.insertAdjacentHTML('beforeend', newHtml);
+            } else {
+                console.error(`"${targetSelector}" not found!`);
+            }
+        });
+    };
+
+    /**
+     * Sets the icon for a component.
+     * @param {string} component The component to set the icon for (e.g. "review", "hours", etc.).
+     * @param {string} icon The name of the icon to use (e.g. "square-rounded-chevron-up.svg", etc.).
+     */
+    function setIcon(component, icon) {
+        if (component == "review") {
+            review.summary.icon = chrome.runtime.getURL(`media/tabler/${icon}`);
+        }
+    };
 
     // key details box
     {
@@ -59,7 +107,7 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
         rightcol.element.classList.add('e-rightcol');
         // add key details to rightcol
         addElement('ele-details.html', rightcol.location, []);
-        WriteLine('Created key details box');
+        writeLine('Info: Created key details box');
     };
 
     // custom detail: ⏳unreleased
@@ -68,12 +116,12 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
         if (unreleased.element) {
             unreleased.state = true;
             addElement('ele-unreleased.html', '.e-details div div.block_content_inner', ['Unreleased']);
-        } else 
-        // newly released
-        if (!review.summary.element[0]) {
-            unreleased.state = true;
-            addElement('ele-unreleased.html', '.e-details div div.block_content_inner', ['New Release']);
-        };
+        } else
+            // newly released
+            if (!review.summary.element[0]) {
+                unreleased.state = true;
+                addElement('ele-unreleased.html', '.e-details div div.block_content_inner', ['New Release']);
+            };
     };
 
     // continue if fully released
@@ -145,7 +193,6 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
 
 
         // basic labels
-        //
 
         // detail: 👥online
         {
@@ -200,65 +247,26 @@ if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All
             );
         };
 
-    };
+    } else {
+        writeLine('End: Unreleased or newly released app, limited details');
+    }
 
 };
 
-/**
- * Fetches an HTML component from the extension's views folder.
- * @param {string} fileName The name of the HTML view to fetch.
- * @returns {Promise<string>} A promise that resolves with the HTML files content.
- */
-function fetchHTML(fileName) {
-    // viewsDir is defined at the top of this file
-    return fetch(chrome.runtime.getURL(viewsDir + fileName))
-        .then(response => response.text())
-        .catch(err => console.error("Error fetching HTML:", err));
-};
-
-/**
- * Creates a child element and inserts it into the page.
- * @param {string} fileName The name of the HTML view to use.
- * @param {string} targetSelector The CSS selector for the parent element.
- * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML contents.
- */
-function addElement(fileName, targetSelector, content) {
-    // fetch the HTML contents of the view
-    fetchHTML(fileName).then(htmlContent => {
-        // replace placeholders like {0}, {1}, etc., with corresponding values from content array
-        let newHtml = htmlContent;
-        content.forEach((value, index) => {
-            // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
-            const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
-            newHtml = newHtml.replace(placeholder, value);
-        });
-
-        // insert the new HTML contents into the page at the target selector
-        const targetElement = document.querySelector(targetSelector);
-        if (targetElement) {
-            // "beforeend" after last child, or "afterbegin" before first child.
-            targetElement.insertAdjacentHTML('beforeend', newHtml);
+// run script
+{
+    // check options
+    getOptions((options) => {
+        if (!options['opt-steam-details']) {
+            writeLine('Stop: Script disabled');
+        }
+        // check if hardware app
+        else if (document.querySelector('div.breadcrumbs div.blockbg a').textContent === "All Hardware") {
+            writeLine('Stop: Hardware app');
         } else {
-            console.error(`"${targetSelector}" not found!`);
+            // run
+            writeLine('Start: Content script');
+            main();
         }
     });
-};
-
-/**
- * Sets the icon for a component.
- * @param {string} component The component to set the icon for (e.g. "review", "hours", etc.).
- * @param {string} icon The name of the icon to use (e.g. "square-rounded-chevron-up.svg", etc.).
- */
-function setIcon(component, icon) {
-    if (component == "review") {
-        review.summary.icon = chrome.runtime.getURL(`media/tabler/${icon}`);
-    }
-};
-
-/**
- * Logs a message to the console with a formatted prefix.
- * @param {...*} message The content to be logged to the console.
- */
-function WriteLine() {
-    console.log('%c[elecord]%c', 'color:#fff; font-weight:bold;', '', ...arguments);
-};
+}
