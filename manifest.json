@@ -19,16 +19,16 @@
     "content_scripts": [
         {
             "matches": ["*://*.pcgamer.com/*"],
-            "js": ["scripts/content-pcgamer.js"],
-            "css": ["styles/content-pcgamer.css"]
+            "js": ["scripts/utils.js", "scripts/content/pcgamer.js"],
+            "css": ["styles/content/pcgamer.css"]
         },
         {
             "matches": [
                 "*://*.steampowered.com/app/*/*/*",
                 "*://*.steampowered.com/app/*/*"
             ],
-            "js": ["scripts/content-steam-app.js"],
-            "css": ["styles/content-steam-app.css"],
+            "js": ["scripts/utils.js", "scripts/content/steam-app.js"],
+            "css": ["styles/content/steam-app.css"],
             "run_at": "document_end"
         }
     ],
@@ -51,7 +51,9 @@
                 "views/steam/app/ele-details.html",
                 "views/steam/app/ele-label.html",
                 "views/steam/app/ele-review.html",
-                "views/steam/app/ele-unreleased.html"
+                "views/steam/app/ele-unreleased.html",
+                "media/fonts/inter/InterVariable.woff2",
+                "media/fonts/inter/InterVariable-Italic.woff2"
             ],
             "matches": ["<all_urls>"]
         }
