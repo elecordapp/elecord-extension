@@ -11,6 +11,22 @@
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
 
+@font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable-Italic.woff2") format("woff2");
+}
+
 body {
     display: flex;
     flex-wrap: wrap;
@@ -20,6 +36,12 @@ body {
     color: #fff;
     font-size: 60%;
     margin: 7px 6px;
+    font-family: "InterVariable", sans-serif;
+    font-optical-sizing: auto;
+}
+
+h1 {
+    margin: 0.6rem 0rem;
 }
 
 a {
@@ -32,7 +54,7 @@ a {
     min-height: 30px;
     outline: solid 1px #444;
     background-color: #333;
-    border-radius: 0.5rem;
+    /* border-radius: 0.5rem; */
 }
 
 /* title */
@@ -52,6 +74,10 @@ a {
     margin-right: 2px;
     font-size: 120%;
     color: #aaa;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    outline-style: solid;
+    outline-width: 1px;
 }
 
 /* content area */
@@ -59,7 +85,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 45px;
+    /* height: 45px; */
+    margin: 0.8rem 0rem 0.3rem 0rem;
 }
 
 /* button  */
