@@ -11,6 +11,22 @@
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
 
+@font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable-Italic.woff2") format("woff2");
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -18,6 +34,8 @@ body {
     background-color: #222;
     color: #fff;
     font-size: 110%;
+    font-family: "InterVariable", sans-serif;
+    font-optical-sizing: auto;
 }
 
 h1 {
@@ -25,12 +43,18 @@ h1 {
 }
 
 h2 {
-    margin-top: 3rem;
+    margin: 3rem auto 1.4rem 0;
+    /* margin-top: 3rem; */
 }
 
 h3 {
-    margin: 2rem 0 0 0;
+    margin: 1rem 0 0 0;
     text-decoration: underline;
+}
+
+p {
+    margin: 0.6rem 0;
+    color: #dfdfdf;
 }
 
 a {
@@ -41,8 +65,8 @@ a {
 
 .e-container {
     margin-top: 10vh;
-    padding: 0.8rem 0 4rem 3rem;
-    width: 500px;
+    padding: 2rem 3rem 4rem 3rem;
+    /* width: 500px; */
     outline: solid 1px #444;
     background-color: #333;
     border-radius: 0.5rem;
@@ -52,12 +76,21 @@ a {
 .e-container__title {
     display: flex;
     align-items: center;
-    margin-top: 1.1rem;
+    /* margin-top: 1.1rem; */
 }
 
 .e-container__title__icon {
     margin-right: 0.8em;
     transform: translateY(-0.1rem);
+}
+
+.e-container__title__version {
+    margin-left: 2rem;
+    color: #afd2ff;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    outline-style: solid;
+    outline-width: 1px;
 }
 
 .e-container__description {
@@ -67,6 +100,7 @@ a {
 .e-container__header {
     display: flex;
     align-items: baseline;
+    justify-content: space-between;
 }
 
 .e-container__header__icon {
@@ -77,12 +111,34 @@ a {
     filter: invert(1);
 }
 
+.e-container__header__icon--reload {
+    cursor: pointer;
+    
+}
+
+.e-container__header__icon--reload:hover {
+    animation: reload-rotate 1.4s ease-in-out infinite;
+}
+
+@keyframes reload-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .e-container__section {
-    margin-bottom: 3rem;
+    background-color: #373839;
+    border-radius: 1rem;
+    padding: 0.1rem 0rem 0.1rem 1rem;
+    margin: 0rem 0rem 1rem 0rem;
+    box-shadow: 0px 0px 6px 0px #00000047;
 }
 
 .e-container__section__sub-section {
-    margin-bottom: 1.2rem;
+    margin: 0 0 1.2rem 0;
 }
 
 /*** [options] ***/
@@ -91,7 +147,10 @@ a {
     display: flex;
     margin: 0.7rem 0.4rem;
     user-select: none;
-    transform: translateY(-0.4rem);
+}
+
+.e-footer .e-option {
+    transform: none;
 }
 
 /* label for input */
@@ -122,15 +181,17 @@ a {
 /*** [footer] ***/
 
 .e-footer {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
+    display: flex;
+    justify-content: space-between;
 }
 
 /* github repo link */
 .e-footer__github-link {
     display: flex;
     align-items: center;
-    margin: 0 2.5rem;
-    float: right;
+    /* margin: 0 2.5rem; */
+    /* float: right; */
 }
 
 /* icons */

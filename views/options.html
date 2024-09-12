@@ -1,10 +1,23 @@
 <!DOCTYPE html>
+<!--
+    This file is licensed under the Affero General Public License (AGPL) version 3.
+
+    Copyright (c) 2024 hazzuk. All rights reserved.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, version 3.
+
+    See the GNU Affero General Public License for more details:
+    <https://www.gnu.org/licenses/agpl-3.0.html>.
+-->
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>Options</title>
+    <title>elecord options</title>
     <link rel="stylesheet" href="../styles/options.css">
+    <link rel="stylesheet" href="../styles/dev-mode.css">
 </head>
 
 <body>
@@ -15,16 +28,20 @@
         <div class="e-container__title">
             <img src="../media/icon/ele-48.png" class="e-container__title__icon">
             <h1>elecord extension&nbsp;</h1>
-            <p id="version">0.0.0</p>
+            <p id="version" class="e-container__title__version">0.0.0</p>
         </div>
-        
+
         <!-- description -->
         <p id="description" class="e-container__description">Description text</p>
 
         <!-- options -->
         <div class="e-container__header">
-            <img src="../media/tabler/dots-circle-horizontal.svg" class="e-container__header__icon e-container__header__icon--svg">
+            <img src="../media/tabler/dots-circle-horizontal.svg"
+                class="e-container__header__icon e-container__header__icon--svg">
             <h2>Options</h2>
+            <img src="../media/tabler/reload.svg" id="reload"
+                class="e-container__header__icon e-container__header__icon--svg e-container__header__icon--reload"
+                title="Reload the extension">
         </div>
 
         <!-- context menu -->
@@ -32,7 +49,7 @@
             <h3>Context Menu</h3>
 
             <div class="e-container__section__sub-section">
-                <p>🔎Search Games</p>
+                <p>🔎Search games</p>
 
                 <div class="e-option">
                     <input type="checkbox" id="opt-search-ggdeals" class="e-option__checkbox">
@@ -46,7 +63,7 @@
             </div>
 
             <div class="e-container__section__sub-section">
-                <p>🔑Redeem Keys</p>
+                <p>🔑Redeem keys</p>
 
                 <div class="e-option">
                     <input type="checkbox" id="opt-redeem-steam" class="e-option__checkbox">
@@ -71,7 +88,7 @@
             <h3>Steam Store</h3>
 
             <div class="e-container__section__sub-section">
-                <p>📗Key Details Info</p>
+                <p>📗Game key details</p>
 
                 <div class="e-option">
                     <input type="checkbox" id="opt-steam-details" class="e-option__checkbox">
@@ -90,7 +107,8 @@
 
                 <div class="e-option">
                     <input type="checkbox" id="opt-pcgamer-steamicon" class="e-option__checkbox">
-                    <label for="opt-pcgamer-steamicon" class="e-option__label">Display 'Steam icon' for store links</label>
+                    <label for="opt-pcgamer-steamicon" class="e-option__label">Display 'Steam icon' for store
+                        links</label>
                 </div>
 
                 <div class="e-option">
@@ -115,7 +133,8 @@
 
     </div>
 
-    <!-- script -->
+    <!-- scripts -->
+    <script src="../scripts/utils.js"></script>
     <script src="../scripts/options.js"></script>
 
 </body>
