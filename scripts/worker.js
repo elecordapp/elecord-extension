@@ -36,7 +36,23 @@ writeLine('Running service worker');
     });
 };
 
+// commands logic
+{
+    // extension commands
+    chrome.commands.onCommand.addListener((shortcut) => {
+        // check options
+        getOptions((options) => {
+            if (options['opt-dev-mode']) {
+                // 'reload' command
+                if (shortcut === 'reload') {
+                    writeLine('Reloading extension');
+                    // reload extension
+                    chrome.runtime.reload();
+                }
+            }
+        });
     });
+};
 
 // context menu
 {

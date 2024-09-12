@@ -74,5 +74,14 @@
         "48": "media/icon/ele-48.png",
         "32": "media/icon/ele-32.png",
         "16": "media/icon/ele-16.png"
+    },
+    "commands": {
+        "reload": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+E",
+                "mac": "Command+Shift+E"
+            },
+            "description": "Reload the extension"
+        }
     }
 }
