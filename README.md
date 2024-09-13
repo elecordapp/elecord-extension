@@ -1,5 +1,5 @@
 <p align="left">
-    <img src="https://github.com/elecordapp/elecord-extension/blob/main/icons/icon-128.png" width="90" height="90"/>
+    <img src="https://github.com/elecordapp/elecord-extension/blob/main/media/icon/ele-128.png" width="90" height="90"/>
 </p>
 
 <h1 align="left">Elecord Extension</h1>
@@ -35,6 +35,7 @@ Collection of handy tools and tweaks for gamers across the web
 ## Installation
 
 ### Extensions Store
+
 > The extension is yet to be published to the Chrome Web Store / Firefox Add-ons Store
 
 <br>

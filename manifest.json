@@ -1,5 +1,5 @@
 {
-    "name": "Elecord",
+    "name": "elecord",
     "version": "1.2.0",
     "manifest_version": 3,
     "description": "Collection of handy tools and tweaks for gamers across the web",
@@ -10,69 +10,85 @@
     ],
     "host_permissions": [
         "*://*.steampowered.com/*",
-        "*://www.pcgamer.com/*"
+        "*://*.pcgamer.com/*"
     ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{e42a96bd-c8dc-4cd9-b7ea-b5c48b02b3cf}"
+        }
+    },
     "background": {
-        "service_worker": "background/background.js",
-        "scripts": ["background/background.js"]
+        "service_worker": "scripts/worker.js",
+        "page": "views/firefox.html"
     },
     "content_scripts": [
         {
-            "matches": ["*://www.pcgamer.com/*"],
-            "js": ["scripts/pcgamer-content.js"],
-            "css": ["styles/pcgamer-styles.css"]
-        },
-        {
-            "matches": ["*://store.steampowered.com/*"],
-            "css": ["styles/steam-app-styles.css"]
+            "matches": ["*://*.pcgamer.com/*"],
+            "js": ["scripts/utils.js", "scripts/content/pcgamer.js"],
+            "css": ["styles/content/pcgamer.css"]
         },
         {
             "matches": [
-                "*://store.steampowered.com/app/*/*/*",
-                "*://store.steampowered.com/app/*/*"
+                "*://*.steampowered.com/app/*/*/*",
+                "*://*.steampowered.com/app/*/*"
             ],
-            "js": ["scripts/steam-app-content.js"],
+            "js": ["scripts/utils.js", "scripts/content/steam-app.js"],
+            "css": ["styles/content/steam-app.css"],
             "run_at": "document_end"
         }
     ],
     "web_accessible_resources": [
         {
             "resources": [
-                "assets/steam-logo.png",
-                "assets/rosette-discount-check.svg",
-                "assets/square-rounded-chevrons-up.svg",
-                "assets/square-rounded-chevron-up.svg",
-                "assets/square-rounded-minus.svg",
-                "assets/square-rounded-chevron-down.svg",
-                "assets/square-rounded-chevrons-down.svg",
-                "assets/poo.svg",
-                "assets/message.svg",
-                "assets/clock-hour-8.svg",
-                "assets/calendar.svg",
-                "components/steam/app/ele-details.html",
-                "components/steam/app/ele-label.html",
-                "components/steam/app/ele-review.html",
-                "components/steam/app/ele-unreleased.html"
+                "media/steam/logo.png",
+                "media/tabler/rosette-discount-check.svg",
+                "media/tabler/square-rounded-chevrons-up.svg",
+                "media/tabler/square-rounded-chevron-up.svg",
+                "media/tabler/square-rounded-minus.svg",
+                "media/tabler/square-rounded-chevron-down.svg",
+                "media/tabler/square-rounded-chevrons-down.svg",
+                "media/tabler/poo.svg",
+                "media/tabler/message.svg",
+                "media/tabler/clock-hour-8.svg",
+                "media/tabler/calendar.svg",
+                "media/tabler/external-link.svg",
+                "media/tabler/dots-circle-horizontal.svg",
+                "views/steam/app/ele-details.html",
+                "views/steam/app/ele-label.html",
+                "views/steam/app/ele-review.html",
+                "views/steam/app/ele-unreleased.html",
+                "media/fonts/inter/InterVariable.woff2",
+                "media/fonts/inter/InterVariable-Italic.woff2"
             ],
             "matches": ["<all_urls>"]
         }
     ],
     "options_ui": {
-        "page": "options/options.html",
-        "open_in_tab": false
+        "page": "views/options.html",
+        "open_in_tab": true
     },
     "action": {
         "default_icon": {
-            "16": "icons/icon-16.png",
-            "32": "icons/icon-32.png",
-            "48": "icons/icon-48.png",
-            "128": "icons/icon-128.png"
-        }
+            "16": "media/icon/ele-16.png",
+            "32": "media/icon/ele-32.png",
+            "48": "media/icon/ele-48.png",
+            "128": "media/icon/ele-128.png"
+        },
+        "default_popup": "views/popup.html"
     },
     "icons": {
-        "128": "icons/icon-128.png",
-        "48": "icons/icon-48.png",
-        "32": "icons/icon-32.png",
-        "16": "icons/icon-16.png"
+        "128": "media/icon/ele-128.png",
+        "48": "media/icon/ele-48.png",
+        "32": "media/icon/ele-32.png",
+        "16": "media/icon/ele-16.png"
+    },
+    "commands": {
+        "reload": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+F",
+                "mac": "Command+Shift+F"
+            },
+            "description": "Reload the extension"
+        }
     }
 }

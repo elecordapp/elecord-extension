@@ -1,0 +1,126 @@
+/*
+ * This file is licensed under the Affero General Public License (AGPL) version 3.
+ *
+ * Copyright (c) 2024 hazzuk. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, version 3.
+ *
+ * See the GNU Affero General Public License for more details:
+ * <https://www.gnu.org/licenses/agpl-3.0.html>.
+ */
+
+@font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../media/fonts/inter/InterVariable-Italic.woff2") format("woff2");
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: sans-serif;
+    width: 200px;
+    background-color: #222;
+    color: #fff;
+    font-size: 60%;
+    margin: 7px 6px;
+    font-family: "InterVariable", sans-serif;
+    font-optical-sizing: auto;
+}
+
+h1 {
+    margin: 0.6rem 0rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* container area */
+.e-container {
+    width: 200px;
+    min-height: 30px;
+    outline: solid 1px #444;
+    background-color: #333;
+    /* border-radius: 0.5rem; */
+}
+
+/* title */
+.e-container__title {
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+}
+
+/* title w/ icon */
+.e-container__title__icon {
+    margin-right: 1em;
+}
+
+/* title w/ version number */
+.e-container__title__version {
+    margin-right: 2px;
+    font-size: 120%;
+    color: #aaa;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+/* content area */
+.e-container__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 45px; */
+    margin: 0.8rem 0rem 0.3rem 0rem;
+}
+
+/* button  */
+.e-container__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.3rem 0;
+    background-color: #2c598b;
+    color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    font-size: 120%;
+    user-select: none;
+    box-shadow: 1px 1px 6px 0px #2020206b;
+    width: 100px;
+}
+
+/* button icon */
+.e-container__button__icon {
+    margin-right: 0.2em;
+    filter: invert(1);
+}
+
+/* button hover */
+.e-container__button:hover {
+    filter: brightness(1.2);
+}
+
+/* button active */
+.e-container__button:active {
+    transform: scale(0.95);
+}

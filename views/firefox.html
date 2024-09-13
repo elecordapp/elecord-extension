@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- Firefox doesn't completely support MV3 yet,        -->
+    <!-- and so it doesn't currently use service workers.   -->
+    <!-- And as importScript only runs in a service worker, -->
+    <!-- we instead load the worker.js (background) script  -->
+    <!-- manually inside this background page with utils.js.-->
+    <script src="../scripts/utils.js"></script>
+    <script src="../scripts/worker.js"></script>
+</head>
+
+</html>
