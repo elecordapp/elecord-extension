@@ -15,57 +15,68 @@
 
 function replaceVideos() {
     // select pcgamer custom videos (does not include youtube videos)
-    const targetElement = document.querySelector('#article-body > div.jwplayer__widthsetter');
+    const heroVideo = document.querySelectorAll('.hero-video-wrapper > div.jwplayer__widthsetter');
+    const articleVideos = document.querySelectorAll('#article-body > div.jwplayer__widthsetter');
 
-    // check target element exists
-    if (targetElement) {
-        writeLine(`replaceVideos() Target element found: ${targetElement}`);
+    function replace(targetVideo) {
+        // check target video exists
+        if (targetVideo.length > 0) {
+            targetVideo.forEach((video) => {
+                writeLine(`replaceVideos() Target video found: ${video}`);
 
-        // select the article og:image meta tag
-        const ogImageMetaTag = document.querySelector('meta[property="og:image"]');
+                // select the article og:image meta tag
+                const ogImageMetaTag = document.querySelector('meta[property="og:image"]');
 
-        // check the og:image meta tag exists
-        if (ogImageMetaTag) {
-            const ogImageUrl = ogImageMetaTag.getAttribute('content');
-            writeLine(`replaceVideos() og:image URL: ${ogImageUrl}`);
+                // check the og:image meta tag exists
+                if (ogImageMetaTag) {
+                    const ogImageUrl = ogImageMetaTag.getAttribute('content');
 
-            // create new div element
-            const heroDiv = document.createElement('div');
-            heroDiv.classList.add('box', 'less-space', 'hero-image-wrapper'); // Add classes
+                    // create new div element
+                    const heroDiv = document.createElement('div');
+                    heroDiv.classList.add('box', 'less-space', 'hero-image-wrapper'); // Add classes
 
-            // create new image element
-            const articleImg = document.createElement('img');
-            articleImg.src = ogImageUrl;
-            articleImg.alt = 'Article Image';
-            articleImg.style.width = '100%'; // Set appropriate styles
-            articleImg.style.height = 'auto';
+                    // create new image element
+                    const articleImg = document.createElement('img');
+                    articleImg.src = ogImageUrl;
+                    articleImg.alt = 'Article Image';
+                    articleImg.style.width = '100%'; // Set appropriate styles
+                    articleImg.style.height = 'auto';
 
-            // create figcaption element
-            const figCaption = document.createElement('figcaption');
-            figCaption.setAttribute('itemprop', 'caption description');
+                    // create figcaption element
+                    const figCaption = document.createElement('figcaption');
+                    figCaption.setAttribute('itemprop', 'caption description');
 
-            // create span element for image credit
-            const spanCredit = document.createElement('span');
-            spanCredit.classList.add('credit');
-            spanCredit.setAttribute('itemprop', 'copyrightHolder');
-            spanCredit.textContent = '(Image credit: Future)';
+                    // create span element for image credit
+                    const spanCredit = document.createElement('span');
+                    spanCredit.classList.add('credit');
+                    spanCredit.setAttribute('itemprop', 'copyrightHolder');
+                    spanCredit.textContent = '(Image credit: Future)';
 
-            // append span to figcaption
-            figCaption.appendChild(spanCredit);
+                    // append span to figcaption
+                    figCaption.appendChild(spanCredit);
 
-            // append image and figcaption to new div
-            heroDiv.appendChild(articleImg);
-            heroDiv.appendChild(figCaption);
+                    // append image and figcaption to new div
+                    heroDiv.appendChild(articleImg);
+                    heroDiv.appendChild(figCaption);
 
-            // replace target video element with new elements
-            targetElement.parentNode.replaceChild(heroDiv, targetElement);
+                    // replace target video element with new elements
+                    video.parentNode.replaceChild(heroDiv, video);
+                } else {
+                    writeLine('replaceVideos() og:image meta tag not found');
+                }
+            })
         } else {
-            writeLine('replaceVideos() og:image meta tag not found');
+            writeLine('replaceVideos() Target video not found');
         }
-    } else {
-        writeLine('replaceVideos() Target element not found');
-    }
-}
+    };
+
+    // replace videos
+    writeLine('replaceVideos() Replacing hero video...');
+    replace(heroVideo);
+    writeLine('replaceVideos() Replacing article videos...');
+    replace(articleVideos);
+
+};
 
 function highlightSteamLinks() {
     // select all <a> elements
@@ -86,9 +97,10 @@ function highlightSteamLinks() {
 
             // insert image inside link
             link.insertBefore(steamLogo, link.firstChild);
+            writeLine(`highlightSteamLinks() Steam link highlighted: ${link}`);
         }
     });
-}
+};
 
 // run script
 {
@@ -104,4 +116,4 @@ function highlightSteamLinks() {
             highlightSteamLinks();
         }
     });
-}
+};
