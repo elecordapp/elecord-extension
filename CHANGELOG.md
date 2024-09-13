@@ -1,4 +1,52 @@
+## What's Changed in v2.0.0
+* update changelog to v2.0.0
+* fix replacevideos() w/multiple pcgamer videos
+* Options rewrite in [#9](https://github.com/elecordapp/elecord-extension/pull/9)
+* fix popup styling on firefox
+* update reload command keys for firefox
+* fix worker.js script imports on firefox
+* move content scripts/styles into folders
+* refactor content scripts
+* add reload extension command
+* add options logic to worker.js
+* refactor options script
+* add dev-mode option and styles
+* update options view
+* update popup view
+* create utils.js helper script
+* add inter font files and license
+* create popup page
+* refactor extension file structure
+* add dynamic version/description to options script
+* add new options page layout
+* add new options page styling
+* update manifest for options page changes
+* add options page icons
+* License updates in [#8](https://github.com/elecordapp/elecord-extension/pull/8)
+* create tabler-icons license notice
+* update files with license header
+* update readme with license notice
+* New icon sizes in [#7](https://github.com/elecordapp/elecord-extension/pull/7)
+* update manifest icon paths
+* update readme icon path
+* create new icons sizes
+* create elecord logo license
+* update placeholder icon with elecord logo
+* Merge branch 'main' of https://github.com/elecordapp/elecord-extension
+* update readme with firefox install guide
+* fix steam app no review score state
+* fix steam app newly released state
+* Firefox compatibility in [#6](https://github.com/elecordapp/elecord-extension/pull/6)
+* fix steam key details box display order on firefox
+* fix empty selection in menu title on firefox
+* add manifest scripts value for firefox
+* add additional steam script comments
+* update manifest with stricter permissions
+
+**Full Changelog**: https://github.com/elecordapp/elecord-extension/compare/v1.2.0...v2.0.0
+
 ## What's Changed in v1.2.0
+* update changelog to v1.2.0
 * fix readme's icon path
 * steam app key details box in [#5](https://github.com/elecordapp/elecord-extension/pull/5)
 * update extension readme features list
@@ -14,7 +62,7 @@
 * add git-cliff changelog configuration in [#3](https://github.com/elecordapp/elecord-extension/pull/3)
 * add git-cliff changelog configuration
 
-**Full Changelog**: https://github.com/elecordapp/elecord-extension/compare/v1.1.0...1.2.0
+**Full Changelog**: https://github.com/elecordapp/elecord-extension/compare/v1.1.0...v1.2.0
 
 ## What's Changed in v1.1.0
 * Customise pcgamer.com articles in [#2](https://github.com/elecordapp/elecord-extension/pull/2)

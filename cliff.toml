@@ -1,7 +1,8 @@
 # git-cliff ~ default configuration file
 # https://git-cliff.org/docs/configuration
 
-# run `git cliff -o CHANGELOG.md` to generate the changelog
+# run `git cliff -o CHANGELOG.md --tag v1.2.3` to generate the changelog (v1.2.3 being the new version)
+# add "* update changelog to v1.2.3" under changes (use this as the commit message)
 
 [remote.github]
 owner = "elecordapp"

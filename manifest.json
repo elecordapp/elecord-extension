@@ -1,8 +1,9 @@
 {
     "name": "elecord",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "manifest_version": 3,
     "description": "Collection of handy tools and tweaks for gamers across the web",
+    "author": "hazzuk",
     "homepage_url": "https://github.com/elecordapp/elecord-extension",
     "permissions": [
         "contextMenus",
