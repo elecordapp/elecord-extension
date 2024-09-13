@@ -13,9 +13,32 @@
 
 // background script
 
-// load utilities script directly
-importScripts('utils.js');
-writeLine('Running service worker');
+// import utilities
+try {
+    try {
+        // on chrome, running as service worker, import utils
+        importScripts('utils.js');
+        try {
+            // using utils on chrome
+            writeLine('Running service worker on Chrome');
+        } catch (chromeError) {
+            console.error(`Error running utils.js after importScripts on Chrome: ${chromeError.message}`);
+            throw "on_chrome";
+        }
+    } catch (e) {
+        console.log('importScripts exception, likely on Firefox');
+    }
+} catch (chromeError) {
+    if (chromeError !== "on_chrome") {
+        // on firefox, running inside background page, utils already loaded
+        try {
+            // using utils on firefox
+            writeLine('Running background script on Firefox');
+        } catch (firefoxError) {
+            console.error(`Error running utils.js on Firefox: ${firefoxError.message}`);
+        }
+    }
+}
 
 // extension logic
 {

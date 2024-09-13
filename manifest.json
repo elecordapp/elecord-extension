@@ -12,9 +12,14 @@
         "*://*.steampowered.com/*",
         "*://*.pcgamer.com/*"
     ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{e42a96bd-c8dc-4cd9-b7ea-b5c48b02b3cf}"
+        }
+    },
     "background": {
         "service_worker": "scripts/worker.js",
-        "scripts": ["scripts/worker.js"]
+        "page": "views/firefox.html"
     },
     "content_scripts": [
         {
