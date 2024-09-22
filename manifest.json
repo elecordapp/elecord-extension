@@ -42,6 +42,7 @@
                 "*://club.steam250.com/app/*"
             ],
             "js": ["scripts/utils.js", "scripts/content/steam250-app.js"],
+            "css": ["styles/content/steam250-app.css"],
             "run_at": "document_start"
         }
     ],

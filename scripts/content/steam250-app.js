@@ -13,9 +13,13 @@
 
 // steam250 app content script
 
+// redirect to steam store
 function main() {
     const currentUrl = window.location.href;
     const match = currentUrl.match(/https:\/\/club\.steam250\.com\/app\/(\d+)/);
+
+    // enable redirect styling
+    document.body.classList.add('e-active');
 
     if (match) {
         // use app ID from match capture group
