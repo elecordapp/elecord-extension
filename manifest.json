@@ -36,6 +36,13 @@
             "js": ["scripts/utils.js", "scripts/content/steam-app.js"],
             "css": ["styles/content/steam-app.css"],
             "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "*://club.steam250.com/app/*"
+            ],
+            "js": ["scripts/utils.js", "scripts/content/steam250-app.js"],
+            "run_at": "document_start"
         }
     ],
     "web_accessible_resources": [
