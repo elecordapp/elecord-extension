@@ -30,6 +30,9 @@ const optionKeys = [
     'opt-pcgamer-steamicon',
     'opt-pcgamer-videos',
     //
+    // steam250-app.js
+    'opt-steam250-redirect',
+    //
     // development
     'opt-dev-mode'
 ];
