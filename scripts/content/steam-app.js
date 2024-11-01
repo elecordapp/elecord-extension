@@ -36,18 +36,18 @@ function main() {
         summary: {
             element: document.querySelectorAll('#userReviews span.game_review_summary'),
             value: "Unknown",
-            icon: chrome.runtime.getURL('media/tabler/poo.svg')
+            icon: iconsBaseURL + 'poo.svg'
         }
     };
     let hours = {
         element: document.querySelector('div.hours_played'),
         value: "0 hrs",
-        icon: chrome.runtime.getURL('media/tabler/clock-hour-8.svg')
+        icon: iconsBaseURL + 'clock-hour-8.svg'
     };
     let date = {
         element: document.querySelector('div.release_date div.date'),
         value: "1970",
-        icon: chrome.runtime.getURL('media/tabler/calendar.svg')
+        icon: iconsBaseURL + 'calendar.svg'
     };
 
     /**
@@ -102,7 +102,7 @@ function main() {
      */
     function setIcon(component, icon) {
         if (component == "review") {
-            review.summary.icon = chrome.runtime.getURL(`media/tabler/${icon}`);
+            review.summary.icon = iconsBaseURL + icon
         }
     };
 
