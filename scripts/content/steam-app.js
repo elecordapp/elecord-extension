@@ -16,6 +16,7 @@
 function main() {
 
     const viewsDir = '/views/steam/app/';
+    const iconsBaseURL = chrome.runtime.getURL('media/tabler/');
 
     let rightcol = {
         location: "div.rightcol.game_meta_data",
@@ -70,19 +71,24 @@ function main() {
     function addElement(fileName, targetSelector, content) {
         // fetch the HTML contents of the view
         fetchHTML(fileName).then(htmlContent => {
-            // replace placeholders like {0}, {1}, etc., with corresponding values from content array
-            let newHtml = htmlContent;
+
+            // replace placeholders (e.g. {0}, {1}) with corresponding values from content[]
+            let newHTML = htmlContent;
             content.forEach((value, index) => {
-                // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
+                // use RegExp constructor to replace all instances of placeholders
                 const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
-                newHtml = newHtml.replace(placeholder, value);
+                newHTML = newHTML.replace(placeholder, value);
             });
 
-            // insert the new HTML contents into the page at the target selector
+            // insert new HTML into page at target selector
             const targetElement = document.querySelector(targetSelector);
             if (targetElement) {
-                // "beforeend" after last child, or "afterbegin" before first child.
-                targetElement.insertAdjacentHTML('beforeend', newHtml);
+                // sanitize HTML
+                const cleanHTML = DOMPurify.sanitize(newHTML, {
+                    ALLOWED_URI_REGEXP: new RegExp(`^${iconsBaseURL}`)
+                });
+                // insert HTML
+                targetElement.insertAdjacentHTML('beforeend', cleanHTML);
             } else {
                 console.error(`"${targetSelector}" not found!`);
             }
