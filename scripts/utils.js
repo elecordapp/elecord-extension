@@ -41,7 +41,7 @@ const optionKeys = [
  */
 function writeLine() {
     console.log(
-        `%c elecord-extension `,
+        `%c🔹elecord-extension `,
         'background: #000; color: #47c7ff',
         ...arguments
     );
