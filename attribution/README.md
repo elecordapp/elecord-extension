@@ -2,15 +2,15 @@
 
 External projects that are used in this repository.
 
-## tabler-icons
+## DOMPurify
 
-- Upstream: https://github.com/tabler/tabler-icons
-- License: MIT
+- Upstream: https://github.com/cure53/DOMPurify
+- License: Apache-2.0, or MPL-2.0
 
 Files extracted from upstream source:
 
-- All `.svg` files in `icons/`
 - `LICENSE`
+- `purify.js`
 
 ## inter
 
@@ -25,3 +25,13 @@ Files generated from upstream source:
 
 - `InterVariable.woff2`
 - `InterVariable-Italic.woff2`
+
+## tabler-icons
+
+- Upstream: https://github.com/tabler/tabler-icons
+- License: MIT
+
+Files extracted from upstream source:
+
+- All `.svg` files in `icons/`
+- `LICENSE`

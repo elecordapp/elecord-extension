@@ -34,7 +34,7 @@
                 "*://*.steampowered.com/app/*/*/*",
                 "*://*.steampowered.com/app/*/*"
             ],
-            "js": ["scripts/utils.js", "scripts/content/steam-app.js"],
+            "js": ["scripts/purify.js", "scripts/utils.js", "scripts/content/steam-app.js"],
             "css": ["styles/content/steam-app.css"],
             "run_at": "document_end"
         }
