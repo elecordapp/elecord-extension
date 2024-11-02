@@ -15,7 +15,8 @@
     ],
     "browser_specific_settings": {
         "gecko": {
-            "id": "{e42a96bd-c8dc-4cd9-b7ea-b5c48b02b3cf}"
+            "id": "{e42a96bd-c8dc-4cd9-b7ea-b5c48b02b3cf}",
+            "strict_min_version": "109.0"
         }
     },
     "background": {
@@ -33,7 +34,7 @@
                 "*://*.steampowered.com/app/*/*/*",
                 "*://*.steampowered.com/app/*/*"
             ],
-            "js": ["scripts/utils.js", "scripts/content/steam-app.js"],
+            "js": ["scripts/purify.js", "scripts/utils.js", "scripts/content/steam-app.js"],
             "css": ["styles/content/steam-app.css"],
             "run_at": "document_end"
         }
@@ -42,6 +43,7 @@
         {
             "resources": [
                 "media/steam/logo.png",
+                "media/steam/coop.png",
                 "media/tabler/rosette-discount-check.svg",
                 "media/tabler/square-rounded-chevrons-up.svg",
                 "media/tabler/square-rounded-chevron-up.svg",

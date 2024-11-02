@@ -16,6 +16,8 @@
 function main() {
 
     const viewsDir = '/views/steam/app/';
+    const steamMediaDir = chrome.runtime.getURL('media/steam/');
+    const tablerIconsDir = chrome.runtime.getURL('media/tabler/');
 
     let rightcol = {
         location: "div.rightcol.game_meta_data",
@@ -35,18 +37,18 @@ function main() {
         summary: {
             element: document.querySelectorAll('#userReviews span.game_review_summary'),
             value: "Unknown",
-            icon: chrome.runtime.getURL('media/tabler/poo.svg')
+            icon: tablerIconsDir + 'poo.svg'
         }
     };
     let hours = {
         element: document.querySelector('div.hours_played'),
         value: "0 hrs",
-        icon: chrome.runtime.getURL('media/tabler/clock-hour-8.svg')
+        icon: tablerIconsDir + 'clock-hour-8.svg'
     };
     let date = {
         element: document.querySelector('div.release_date div.date'),
         value: "1970",
-        icon: chrome.runtime.getURL('media/tabler/calendar.svg')
+        icon: tablerIconsDir + 'calendar.svg'
     };
 
     /**
@@ -70,19 +72,24 @@ function main() {
     function addElement(fileName, targetSelector, content) {
         // fetch the HTML contents of the view
         fetchHTML(fileName).then(htmlContent => {
-            // replace placeholders like {0}, {1}, etc., with corresponding values from content array
-            let newHtml = htmlContent;
+
+            // replace placeholders (e.g. {0}, {1}) with corresponding values from content[]
+            let newHTML = htmlContent;
             content.forEach((value, index) => {
-                // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
+                // use RegExp constructor to replace all instances of placeholders
                 const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
-                newHtml = newHtml.replace(placeholder, value);
+                newHTML = newHTML.replace(placeholder, value);
             });
 
-            // insert the new HTML contents into the page at the target selector
+            // insert new HTML into page at target selector
             const targetElement = document.querySelector(targetSelector);
             if (targetElement) {
-                // "beforeend" after last child, or "afterbegin" before first child.
-                targetElement.insertAdjacentHTML('beforeend', newHtml);
+                // sanitize HTML
+                const cleanHTML = DOMPurify.sanitize(newHTML, {
+                    ALLOWED_URI_REGEXP: new RegExp(`^(${tablerIconsDir}|${steamMediaDir})`)
+                });
+                // insert HTML
+                targetElement.insertAdjacentHTML('beforeend', cleanHTML);
             } else {
                 console.error(`"${targetSelector}" not found!`);
             }
@@ -96,7 +103,7 @@ function main() {
      */
     function setIcon(component, icon) {
         if (component == "review") {
-            review.summary.icon = chrome.runtime.getURL(`media/tabler/${icon}`);
+            review.summary.icon = tablerIconsDir + icon
         }
     };
 
@@ -205,9 +212,10 @@ function main() {
 
             // add to key details
             if (online) {
+                const coopIcon = steamMediaDir + 'coop.png'
                 addElement('ele-label.html',
                     '.e-details div div.block_content_inner',
-                    ['https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png', 'Online']
+                    [coopIcon, 'Online']
                 );
             }
         };
