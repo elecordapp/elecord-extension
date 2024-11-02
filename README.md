@@ -8,7 +8,7 @@
 Collection of handy tools and tweaks for gamers across the web
 </p>
 
-> Notice: This extension is in early development and it's scope has yet to be fully defined
+> Notice: This extension is in early development and doesn't currently integrate w/ elecord
 
 <br>
 
