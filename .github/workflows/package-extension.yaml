@@ -1,0 +1,64 @@
+name: Package Extension
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  package-extension:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # setup
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          sudo apt-get install -y moreutils
+
+      - name: Set version
+        id: vars
+        run: |
+          # get version number from release or default to manual
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "VERSION=manual" >> $GITHUB_ENV
+          fi
+
+      - name: Remove unnecessary files
+        run: |
+          rm -rf .git
+          rm -rf .github
+          rm -f cliff.toml
+          mv LICENSE LICENSE.txt
+
+      - name: Copy files separately
+        run: |
+          mkdir chrome firefox
+          rsync -av --exclude='chrome' --exclude='firefox' * chrome/
+          rsync -av --exclude='chrome' --exclude='firefox' * firefox/
+
+      # package for chrome
+
+      - name: Remove Firefox manifest.json entries
+        run: |
+          echo "chrome"
+
+      # package for firefox
+
+      - name: Remove service_worker from JSON
+        run: |
+          jq 'del(.background.service_worker)' firefox/manifest.json | sponge firefox/manifest.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: elecord-extension-${{ env.VERSION }}_firefox
+          path: firefox
