@@ -25,12 +25,9 @@ jobs:
       - name: Set version
         id: vars
         run: |
-          # get version number from release
-          if [ -n "${{ github.event.release.tag_name }}" ]; then
-            echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-          else
-            echo "VERSION=x" >> $GITHUB_ENV
-          fi
+          git fetch --tags
+          git describe --tags `git rev-list --tags --max-count=1`
+          echo "VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
       - name: Remove unnecessary files
         run: |
