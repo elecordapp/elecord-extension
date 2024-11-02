@@ -16,7 +16,8 @@
 function main() {
 
     const viewsDir = '/views/steam/app/';
-    const iconsBaseURL = chrome.runtime.getURL('media/tabler/');
+    const steamMediaDir = chrome.runtime.getURL('media/steam/');
+    const tablerIconsDir = chrome.runtime.getURL('media/tabler/');
 
     let rightcol = {
         location: "div.rightcol.game_meta_data",
@@ -36,18 +37,18 @@ function main() {
         summary: {
             element: document.querySelectorAll('#userReviews span.game_review_summary'),
             value: "Unknown",
-            icon: iconsBaseURL + 'poo.svg'
+            icon: tablerIconsDir + 'poo.svg'
         }
     };
     let hours = {
         element: document.querySelector('div.hours_played'),
         value: "0 hrs",
-        icon: iconsBaseURL + 'clock-hour-8.svg'
+        icon: tablerIconsDir + 'clock-hour-8.svg'
     };
     let date = {
         element: document.querySelector('div.release_date div.date'),
         value: "1970",
-        icon: iconsBaseURL + 'calendar.svg'
+        icon: tablerIconsDir + 'calendar.svg'
     };
 
     /**
@@ -85,7 +86,7 @@ function main() {
             if (targetElement) {
                 // sanitize HTML
                 const cleanHTML = DOMPurify.sanitize(newHTML, {
-                    ALLOWED_URI_REGEXP: new RegExp(`^${iconsBaseURL}`)
+                    ALLOWED_URI_REGEXP: new RegExp(`^(${tablerIconsDir}|${steamMediaDir})`)
                 });
                 // insert HTML
                 targetElement.insertAdjacentHTML('beforeend', cleanHTML);
@@ -102,7 +103,7 @@ function main() {
      */
     function setIcon(component, icon) {
         if (component == "review") {
-            review.summary.icon = iconsBaseURL + icon
+            review.summary.icon = tablerIconsDir + icon
         }
     };
 
@@ -211,9 +212,10 @@ function main() {
 
             // add to key details
             if (online) {
+                const coopIcon = steamMediaDir + 'coop.png'
                 addElement('ele-label.html',
                     '.e-details div div.block_content_inner',
-                    ['https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png', 'Online']
+                    [coopIcon, 'Online']
                 );
             }
         };

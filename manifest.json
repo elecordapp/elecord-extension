@@ -43,6 +43,7 @@
         {
             "resources": [
                 "media/steam/logo.png",
+                "media/steam/coop.png",
                 "media/tabler/rosette-discount-check.svg",
                 "media/tabler/square-rounded-chevrons-up.svg",
                 "media/tabler/square-rounded-chevron-up.svg",
