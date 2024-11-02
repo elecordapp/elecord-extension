@@ -25,11 +25,11 @@ jobs:
       - name: Set version
         id: vars
         run: |
-          # get version number from release or default to manual
+          # get version number from release
           if [ -n "${{ github.event.release.tag_name }}" ]; then
             echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
           else
-            echo "VERSION=manual" >> $GITHUB_ENV
+            echo "VERSION=x" >> $GITHUB_ENV
           fi
 
       - name: Remove unnecessary files
@@ -47,18 +47,28 @@ jobs:
 
       # package for chrome
 
-      - name: Remove Firefox manifest.json entries
+      - name: Remove MV2 background page
         run: |
-          echo "chrome"
+          rm -f chrome/views/firefox.html
+
+      - name: Remove MV2 manifest.json entries
+        run: |
+          jq 'del(.browser_specific_settings, .background.page)' chrome/manifest.json | sponge chrome/manifest.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: elecord-ext-${{ env.VERSION }}_chrome
+          path: chrome
 
       # package for firefox
 
-      - name: Remove service_worker from JSON
+      - name: Remove MV3 service_worker from manifest.json
         run: |
           jq 'del(.background.service_worker)' firefox/manifest.json | sponge firefox/manifest.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: elecord-extension-${{ env.VERSION }}_firefox
+          name: elecord-ext-${{ env.VERSION }}_firefox
           path: firefox
