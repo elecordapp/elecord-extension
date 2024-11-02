@@ -1,3 +1,14 @@
+## What's Changed in v2.0.1
+* update readme dev notice
+* Sanitize html in [#10](https://github.com/elecordapp/elecord-extension/pull/10)
+* refactor steam icon locations
+* refactor icons with global baseurl
+* add sanitize before html insert
+* add dompurify library
+* update firefox min version
+
+**Full Changelog**: https://github.com/elecordapp/elecord-extension/compare/v2.0.0...v2.0.1
+
 ## What's Changed in v2.0.0
 * update changelog to v2.0.0
 * fix replacevideos() w/multiple pcgamer videos
