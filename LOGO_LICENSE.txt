@@ -1,5 +1,5 @@
 Elecord Logo
-Copyright (c) 2024 hazzuk. All rights reserved.
+Copyright (c) 2024 hazzuk
 
 The Elecord logos contained in this repository are not part of the AGPL-3.0 license.
 

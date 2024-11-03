@@ -1,7 +1,7 @@
 /*
  * This file is licensed under the Affero General Public License (AGPL) version 3.
  *
- * Copyright (c) 2024 hazzuk. All rights reserved.
+ * Copyright (c) 2024 hazzuk
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
