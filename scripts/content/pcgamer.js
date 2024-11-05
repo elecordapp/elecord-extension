@@ -84,8 +84,8 @@ function highlightSteamLinks() {
 
     // iterate all <a> elements
     links.forEach(link => {
-        // check href attribute contains specified URL
-        if (link.href.includes('https://store.steampowered.com/app/')) {
+        // check href attribute contains specified URL and underlined text
+        if (link.href.includes('https://store.steampowered.com/app/') && link.querySelector('u')) {
             // add class to highlight steam link
             link.classList.add('highlight-steam-link');
 
