@@ -8,6 +8,15 @@
 Collection of handy tools and tweaks for gamers across the web
 </p>
 
+<a href="https://chromewebstore.google.com/detail/elecord/kbelddnfcpinogodclbkijhphbnlckbf" target="_blank">
+    <img alt="Chrome Web Store Version" src="https://img.shields.io/chrome-web-store/v/kbelddnfcpinogodclbkijhphbnlckbf?style=for-the-badge&logo=googlechrome&logoColor=%23fff">
+</a>
+<a href="https://addons.mozilla.org/en-GB/firefox/addon/elecord/" target="_blank">
+    <img alt="Mozilla Add-on Version" src="https://img.shields.io/amo/v/elecord?style=for-the-badge&logo=firefoxbrowser&logoColor=%23fff&label=FIREFOX%20ADD-ONS">
+</a>
+
+<br>
+
 > Notice: This extension is in early development and doesn't currently integrate w/ elecord
 
 <br>
@@ -34,11 +43,11 @@ Collection of handy tools and tweaks for gamers across the web
 
 ## Installation
 
-### Extensions Store
+### Extensions Stores
 
-> The extension is yet to be published to the Chrome Web Store / Firefox Add-ons Store
+- [Chrome Web Store](https://chromewebstore.google.com/detail/elecord/kbelddnfcpinogodclbkijhphbnlckbf)
 
-<br>
+- [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/elecord/)
 
 ### Manual
 #### Chrome, Edge, Brave, Opera
