@@ -49,45 +49,110 @@ function main() {
         icon: chrome.runtime.getURL('media/tabler/calendar.svg')
     };
 
-    /**
-     * Fetches an HTML component from the extension's views folder.
-     * @param {string} fileName The name of the HTML view to fetch.
-     * @returns {Promise<string>} A promise that resolves with the HTML files content.
-     */
-    function fetchHTML(fileName) {
-        // viewsDir is defined at the top of this file
-        return fetch(chrome.runtime.getURL(viewsDir + fileName))
-            .then(response => response.text())
-            .catch(err => console.error("Error fetching HTML:", err));
-    };
+    // /**
+    //  * Fetches an HTML component from the extension's views folder.
+    //  * @param {string} fileName The name of the HTML view to fetch.
+    //  * @returns {Promise<string>} A promise that resolves with the HTML files content.
+    //  */
+    // function fetchHTML(fileName) {
+    //     // viewsDir is defined at the top of this file
+    //     return fetch(chrome.runtime.getURL(viewsDir + fileName))
+    //         .then(response => response.text())
+    //         .catch(err => console.error("Error fetching HTML:", err));
+    // };
 
-    /**
-     * Creates a child element and inserts it into the page.
-     * @param {string} fileName The name of the HTML view to use.
-     * @param {string} targetSelector The CSS selector for the parent element.
-     * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML contents.
-     */
-    function addElement(fileName, targetSelector, content) {
-        // fetch the HTML contents of the view
-        fetchHTML(fileName).then(htmlContent => {
-            // replace placeholders like {0}, {1}, etc., with corresponding values from content array
-            let newHtml = htmlContent;
-            content.forEach((value, index) => {
-                // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
-                const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
-                newHtml = newHtml.replace(placeholder, value);
-            });
+    // /**
+    //  * Creates a child element and inserts it into the page.
+    //  * @param {string} fileName The name of the HTML view to use.
+    //  * @param {string} targetSelector The CSS selector for the parent element.
+    //  * @param {Array<string>} content An array of strings, each item is a value to replace placeholders (e.g. {0}, {1}...) in the HTML contents.
+    //  */
+    // function addElement(fileName, targetSelector, content) {
+    //     // fetch the HTML contents of the view
+    //     fetchHTML(fileName).then(htmlContent => {
+    //         // replace placeholders like {0}, {1}, etc., with corresponding values from content array
+    //         let newHtml = htmlContent;
+    //         content.forEach((value, index) => {
+    //             // use RegExp constructor to replace all instances of placeholders like {0}, {1}, etc...
+    //             const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
+    //             newHtml = newHtml.replace(placeholder, value);
+    //         });
 
-            // insert the new HTML contents into the page at the target selector
-            const targetElement = document.querySelector(targetSelector);
-            if (targetElement) {
-                // "beforeend" after last child, or "afterbegin" before first child.
-                targetElement.insertAdjacentHTML('beforeend', newHtml);
-            } else {
-                console.error(`"${targetSelector}" not found!`);
-            }
-        });
-    };
+    //         // insert the new HTML contents into the page at the target selector
+    //         const targetElement = document.querySelector(targetSelector);
+    //         if (targetElement) {
+    //             // "beforeend" after last child, or "afterbegin" before first child.
+    //             targetElement.insertAdjacentHTML('beforeend', newHtml);
+    //         } else {
+    //             console.error(`"${targetSelector}" not found!`);
+    //         }
+    //     });
+    // };
+
+    // async function addElement(fileName, targetSelector, content) {
+    //     // insert the HTML component into the page at the target selector
+
+    //     // define target element
+    //     const targetElement = document.querySelector(targetSelector);
+    //     // check target element exists
+    //     if (!targetElement) {
+    //         console.error(`"${targetSelector}" not found!`);
+    //         return;
+    //     }
+
+    //     const response = await fetch(chrome.runtime.getURL(viewsDir + fileName));
+    //     if (!response.ok) throw new Error("Failed to load HTML file.");
+        
+    //     const htmlText = await response.text();
+    //     const template = document.createElement('template');
+    //     template.innerHTML = htmlText;
+        
+    //     // Append template's content to the target element
+    //     targetElement.appendChild(template.content.cloneNode(true));
+    // };
+
+
+    // insert html template
+    function addElement(fileName, targetSelector, content, callback) {
+
+        // fetch html from views template file
+        fetch(chrome.runtime.getURL(viewsDir + fileName))
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to load HTML file.");
+                return response.text();
+            })
+            .then(htmlText => {
+
+                // // replace placeholders (e.g. {0}, {1}) with corresponding values from content[]
+                // let liveHtml = htmlText;
+                // content.forEach((value, index) => {
+                //     // use RegExp constructor to replace all instances of placeholders
+                //     const placeholder = new RegExp(`{\\s*${index}\\s*}`, 'g');
+                //     liveHtml = liveHtml.replace(placeholder, value);
+                // });
+
+                // create view template
+                const template = document.createElement('template');
+                // add html content to template
+                template.innerHTML = htmlText;
+                //template.innerHTML = liveHtml;
+                
+                // define target element
+                const targetElement = document.querySelector(targetSelector);
+                // check target element exists
+                if (!targetElement) {
+                    console.error(`"${targetSelector}" not found!`);
+                    return;
+                }
+
+                // append template element to target element
+                targetElement.appendChild(template.content.cloneNode(true));
+
+                // run the callback after insertion is complete
+                if (callback) callback();
+            })
+            .catch(error => console.error("Error loading HTML:", error));
+    }
 
     /**
      * Sets the icon for a component.
@@ -106,11 +171,9 @@ function main() {
         rightcol.element = document.querySelector(rightcol.location)
         rightcol.element.classList.add('e-rightcol');
         // add key details to rightcol
-        addElement('ele-details.html', rightcol.location, []);
         writeLine('Info: Created key details box');
-    };
-
-    // custom detail: ⏳unreleased
+        addElement('ele-details.html', rightcol.location, [], function () {
+                // custom detail: ⏳unreleased
     {
         // unreleased
         if (unreleased.element) {
@@ -250,6 +313,11 @@ function main() {
     } else {
         writeLine('End: Unreleased or newly released app, limited details');
     }
+        });
+        
+    };
+
+
 
 };
 
