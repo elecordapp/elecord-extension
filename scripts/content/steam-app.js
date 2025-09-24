@@ -31,7 +31,7 @@ function main() {
     };
     let review = {
         score: {
-            element: document.querySelectorAll('#userReviews div.user_reviews_summary_row'),
+            element: document.querySelectorAll('#userReviews a.user_reviews_summary_row'),
             value: "0%"
         },
         summary: {
