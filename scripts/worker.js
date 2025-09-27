@@ -97,7 +97,7 @@ try {
             // submenus
             {
                 // search
-                if (options['opt-search-ggdeals'] || options['opt-search-steam']) {
+                if (options['opt-search-ggdeals'] || options['opt-search-steam'] || options['opt-search-protondb']) {
                     chrome.contextMenus.create({
                         id: "menu-search",
                         title: "🔎 Search '%s'",
@@ -118,6 +118,15 @@ try {
                         chrome.contextMenus.create({
                             id: "menu-search-steam",
                             title: "🔵 Steam",
+                            contexts: ["selection"],
+                            parentId: "menu-search"
+                        });
+                    }
+                    // protondb
+                    if (options['opt-search-protondb']) {
+                        chrome.contextMenus.create({
+                            id: "menu-search-protondb",
+                            title: "🪐 ProtonDB",
                             contexts: ["selection"],
                             parentId: "menu-search"
                         });
@@ -203,6 +212,9 @@ try {
                 break;
             case "menu-search-steam":
                 encodeURL('https://store.steampowered.com/search/?term=', info.selectionText);
+                break;
+            case "menu-search-protondb":
+                encodeURL('https://www.protondb.com/search?q=', info.selectionText);
                 break;
 
             // redeem

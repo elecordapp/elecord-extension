@@ -26,6 +26,7 @@ Collection of handy tools and tweaks for gamers across the web
 - [x] Context menu search for games
     - gg.deals
     - Steam
+    - ProtonDB
 - [x] Context menu redeem game keys
     - Steam
     - GOG

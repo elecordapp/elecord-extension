@@ -19,6 +19,7 @@ const optionKeys = [
     // worker.js
     'opt-search-ggdeals',
     'opt-search-steam',
+    'opt-search-protondb',
     'opt-redeem-steam',
     'opt-redeem-gog',
     'opt-redeem-epic',
